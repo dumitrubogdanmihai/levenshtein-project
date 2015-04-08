@@ -4,33 +4,34 @@
 #include "list.h"
 #include "levenshtein.h"
 
-
 int main() {
-    int i=0,lev;
+    int i=0,lev=-1;
     char buffer[255];
-    char cmdLine[80];
-    char cuvanttt[80]="CEAW";
+    char word[80]="CEAW";
     List l;
-    ListNode *n = NULL;
+    list_node *n = NULL;
     l.head = NULL;
-
 
     FILE *f=fopen("cuvinte.txt","r");
     while(fgets(&buffer,255,f)){
+
+        // pentru unica aparitie a fiecarui cuvant
         //if( listSearch(&l,&buffer)==NULL ){
-            n = (ListNode*) malloc(sizeof(ListNode));
+            n = (list_node*) malloc(sizeof(list_node));
             n->word = malloc(sizeof(buffer));
             strcpy(n->word,buffer);
-            listInsert(&l,n);
+            list_insert(&l,n);
         //}
     }
 
-printf("Cuvintele au fost incarcate din fisier! \n\n\n");
 
-    ListNode *x;
+    printf("Cuvintele au fost incarcate din fisier! \n\n\n");
+
+    list_node *x;
     x = l.head;
     while ( x!=NULL ) {
-        lev = leven1(cuvanttt, strlen(cuvanttt), x->word, strlen(x->word));
+        lev = leven1(word, strlen(word), x->word, strlen(x->word));
+        assert(lev>=0);
         if( lev <= 1){
             printf("%d - %s",lev , x->word );
             //break;
@@ -39,5 +40,8 @@ printf("Cuvintele au fost incarcate din fisier! \n\n\n");
         x = x->next;
     }
     printf("\n\nS-au cautat toate cuvintele!");
+
+    fclose(f);
     getchar();
 }
+

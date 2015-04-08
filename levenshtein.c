@@ -1,6 +1,6 @@
 #include"list.h"
 
-int minn(int a, int b, int c) {
+int min_val(int a, int b, int c) {
     if(a < b){
         if(a < c)
             return a;
@@ -30,7 +30,7 @@ int leven1( char *a, unsigned int la, char *b, unsigned int lb ){
                 m[i+1][j+1]=m[i][j];
             }
             else{
-                m[i+1][j+1]=minn(m[i][j],m[i][j+1],m[i+1][j])+1;
+                m[i+1][j+1]=min_val(m[i][j], m[i][j+1], m[i+1][j]) + 1;
             }
         }
     }

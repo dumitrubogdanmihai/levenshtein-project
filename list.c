@@ -1,8 +1,8 @@
 #include "list.h"
 #include <stdio.h>
 
-ListNode* listSearch(List *l, char *k) {
-    ListNode *x;
+List_Node* listSearch(List *l, char *k) {
+    List_Node *x;
     x = l->head;
     while ( x!=NULL && strcmp(x->word,k)!=0 ) {
         x = x->next;
@@ -10,7 +10,7 @@ ListNode* listSearch(List *l, char *k) {
     return x;
 }
 
-void listInsert(List *l, ListNode *x) {
+void list_insert(List *l, List_Node *x) {
     x->next = l->head;
     if (l->head != NULL) {
         l->head->prev = x;
@@ -19,7 +19,7 @@ void listInsert(List *l, ListNode *x) {
     x->prev = NULL;
 }
 
-void listRemove(List *l,ListNode *x) {
+void list_remove(List *l,List_Node *x) {
     if (x->prev != NULL) {
         x->prev->next = x->next;
     }
@@ -31,8 +31,8 @@ void listRemove(List *l,ListNode *x) {
     }
 }
 
-void printList(List l) {
-    ListNode *n;
+void print_list(List l) {
+    List_Node *n;
     n = l.head;
     printf("Elementele listei sunt : ");
     while (n != NULL) {

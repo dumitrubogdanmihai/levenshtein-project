@@ -5,15 +5,16 @@ typedef struct list_node {
     struct list_node *next;
     struct list_node *prev;
     char *word;
-} ListNode;
+} List_Node;
+// *** litere mari pt a semnala ca este un tip de date
 
 typedef struct list {
     struct list_node *head;
 } List;
 
-ListNode* listSearch(List *l,char *k);
-void listInsert(List *l, ListNode *x);
-void listRemove(List *l, ListNode *x);
-void printList(List l);
+List_Node* listSearch(List *l,char *k);
+void list_insert(List *l, List_Node *x);
+void list_remove(List *l, List_Node *x);
+void print_list(List l);
 
 #endif // LIST_H_INCLUDED
