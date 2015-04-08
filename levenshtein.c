@@ -15,17 +15,18 @@ int min_val(int a, int b, int c) {
     }
 }
 
-int leven1( char *a, unsigned int la, char *b, unsigned int lb ){
+// iterativ
+int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){
     unsigned int m[50][50];
     int i,j;
 
-    for(i=0;i<la;i++)
+    for(i=0;i<lena;i++)
         m[i][0]=i;
-    for(j=0;j<lb;j++)
+    for(j=0;j<lenb;j++)
         m[0][j]=j;
 
-    for(i=0;i<la;i++){
-        for(j=0;j<lb;j++){
+    for(i=0;i<lena;i++){
+        for(j=0;j<lenb;j++){
             if(a[i]==b[j]){
                 m[i+1][j+1]=m[i][j];
             }
@@ -34,9 +35,10 @@ int leven1( char *a, unsigned int la, char *b, unsigned int lb ){
             }
         }
     }
-    return m[la][lb];
+    return m[lena][lenb];
 }
 
+// recursiv
 int leven2(const char *s, int ls, const char *t, int lt)
 {
         int a, b, c;
