@@ -39,12 +39,28 @@ key_prev = key->prev;
 }
 
 void list_insert(List *l, List_Node *x) {
-    x->next = l->head;
-    if (l->head != NULL) {
-        l->head->prev = x;
+    if(l->head==NULL){
+        l->head = x;
+        l->tail= x;
+        l->head->next=NULL;
+        l->tail->next=NULL;
+        l->head->prev=NULL;
+        l->tail->prev=NULL;
     }
-    l->head = x;
-    x->prev = NULL;
+    else{
+        x->next = NULL;
+        x->prev = l->tail;
+        l->tail->next = x;
+        l->tail = x;
+    }
+
+
+//    x->next = l->head;
+//    if (l->head != NULL) {
+//        l->head->prev = x;
+//    }
+//    l->head = x;
+//    x->prev = NULL;
 }
 
 void list_remove(List *l,List_Node *x) {
@@ -59,13 +75,25 @@ void list_remove(List *l,List_Node *x) {
     }
 }
 
-void print_list(List l) {
+void print_list(List l, char *ord) {
     List_Node *n;
-    n = l.head;
-    printf("Elementele listei sunt : ");
-    while (n != NULL) {
-        printf("%s ",n->word);
-        n = n->next;
+
+    if(ord=='a'){
+            n = l.head;
+            printf("Elementele listei sunt : ");
+            while (n != NULL) {
+                printf("%s ",n->word);
+                n = n->next;
+            }
+            printf("\n");
     }
-    printf("\n");
+    else{
+            n = l.tail;
+            printf("Elementele listei sunt : ");
+            while (n != NULL) {
+                printf("%s ",n->word);
+                n = n->prev;
+            }
+            printf("\n");
+    }
 }

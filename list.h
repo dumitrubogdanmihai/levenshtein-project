@@ -10,12 +10,13 @@ typedef struct list_node {
 
 typedef struct list {
     struct list_node *head;
+    struct list_node *tail;
 } List;
 
 List_Node* listSearch(List *l,char *k);
 void list_insert(List *l, List_Node *x);
 void list_remove(List *l, List_Node *x);
-void print_list(List l);
+void print_list(List l, char *ord);
 void sort_list_lex( List *l );
 
 #endif // LIST_H_INCLUDED

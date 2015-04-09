@@ -12,6 +12,7 @@ int main() {
     List l;
     List_Node *n = NULL;
     l.head = NULL;
+    l.tail = NULL;
 
     FILE *f=fopen("dictionary/text.txt","r");
     //FILE *f=fopen("dictionary/text.txt","r");
@@ -29,7 +30,7 @@ int main() {
 
     //print_list(l);
     //sort_list_lex(&l);
-    print_list(l);
+    print_list(l,'a');
 
     List_Node *x;
     x = l.head;
