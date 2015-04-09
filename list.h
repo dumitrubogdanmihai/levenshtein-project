@@ -16,5 +16,6 @@ List_Node* listSearch(List *l,char *k);
 void list_insert(List *l, List_Node *x);
 void list_remove(List *l, List_Node *x);
 void print_list(List l);
+void sort_list_lex( List *l );
 
 #endif // LIST_H_INCLUDED

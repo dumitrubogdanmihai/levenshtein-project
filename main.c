@@ -13,7 +13,8 @@ int main() {
     List_Node *n = NULL;
     l.head = NULL;
 
-    FILE *f=fopen("dictionary/rodex.txt","r");
+    FILE *f=fopen("dictionary/text.txt","r");
+    //FILE *f=fopen("dictionary/text.txt","r");
     while(fgets(&buffer,255,f)){
 
         // pentru unica aparitie a fiecarui cuvant
@@ -24,9 +25,11 @@ int main() {
             list_insert(&l,n);
         //}
     }
-
-
     printf("Cuvintele au fost incarcate din fisier! \n\n\n");
+
+    //print_list(l);
+    //sort_list_lex(&l);
+    print_list(l);
 
     List_Node *x;
     x = l.head;
@@ -44,5 +47,6 @@ int main() {
 
     fclose(f);
     getchar();
+    return 0;
 }
 
