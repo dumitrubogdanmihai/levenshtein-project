@@ -8,13 +8,13 @@
 int main() {
     int i=0,lev=-1;
     char buffer[255];
-    char word[80]="CEAW";
+    char word[80]="CARNEALA";
     List l;
     List_Node *n = NULL;
     l.head = NULL;
     l.tail = NULL;
 
-    FILE *f=fopen("dictionary/text.txt","r");
+    FILE *f=fopen("dictionary/rodex.txt","r");
     while(fgets(&buffer,255,f)){
         if( buffer[strlen(buffer)-1] == '\n' )
             buffer[strlen(buffer)-1] ='\0';
@@ -27,7 +27,6 @@ int main() {
         //}
     }
     printf("Cuvintele au fost incarcate din fisier! \n\n\n");
-
     print_list(l,'a');
     sort_list_len(&l);
     print_list(l,'a');
@@ -40,7 +39,7 @@ int main() {
         if( lev <= 1){
             printf("%d - %s",lev , x->word );
         }
-     //printf("%s cu %d \n\n",x->word,lev);
+        //sprintf("%s cu %d \n\n",x->word,lev);
         x = x->next;
     }
     printf("\n\nS-a executat functia lev pt toate cuvintele!");

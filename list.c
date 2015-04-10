@@ -10,9 +10,8 @@ List_Node* listSearch(List *l, char *k) {
     return x;
 }
 
-//sorteaza lexicografic lista cu insertion sort
+//sorteaza dupa numarul de caractere cu insertion sort
 void sort_list_len( List *l ){
-    int contor=0;
     List_Node *i;
     List_Node *key;
     List_Node *key_next;
@@ -22,17 +21,18 @@ void sort_list_len( List *l ){
     key_next = key->next;
 
         i = l->head;
-        printf("\nEtapa %d \t head = %s   ||   tail = %s \n",contor++, l->head->word , l->tail->word);
-        printf("\n\tkey = %s\n", key->word);
         while( ( strlen(key->word) > strlen(i->word) )  && i!=key){
+       // while( strcmp(i->word,key->word) < 0  && i!=key){
             i = i->next;
         }
-        printf("\ti   = %s\n", i->word);
-
-
 
         //key porneste de la head.next deci este imposibil ca prev sa fie NULL deci nu are nevoie de if
         if(key!=i){
+
+            if(key->next==l->tail){
+                l->tail = key->prev;
+            }
+
             if(i->prev!=NULL)
                 i->prev->next = key;
             else
@@ -40,21 +40,56 @@ void sort_list_len( List *l ){
 
             if(key->next!=NULL)
                 key->next->prev = key->prev;
-            else
-                l->tail = key->prev;
+
             if(key->prev!=NULL)
                 key->prev->next = key->next;
-
 
             key->prev = i->prev;
             key->next = i;
             i->prev = key;
         }
 
+    key = key_next;
+    }
+}
+//sorteaza lexicografic lista cu insertion sort
+void sort_list_lex( List *l ){
+    List_Node *i;
+    List_Node *key;
+    List_Node *key_next;
+    key = l->head->next;
 
+    while( key != NULL){
+    key_next = key->next;
 
+        i = l->head;
+        while( strcmp(i->word,key->word) < 0  && i!=key){
+            i = i->next;
+        }
 
-    print_list(*l,'a');
+        //key porneste de la head.next deci este imposibil ca prev sa fie NULL deci nu are nevoie de if
+        if(key!=i){
+
+            if(key->next==l->tail){
+                l->tail = key->prev;
+            }
+
+            if(i->prev!=NULL)
+                i->prev->next = key;
+            else
+                l->head = key;
+
+            if(key->next!=NULL)
+                key->next->prev = key->prev;
+
+            if(key->prev!=NULL)
+                key->prev->next = key->next;
+
+            key->prev = i->prev;
+            key->next = i;
+            i->prev = key;
+        }
+
     key = key_next;
     }
 }
@@ -94,20 +129,20 @@ void list_remove(List *l,List_Node *x) {
     if (x->next != NULL) {
         x->next->prev = x->prev;
     }
+    else {
+        l->tail = x->prev;
+    }
 }
 
 void print_list(List l, char *ord) {
     List_Node *n;
-
     if(ord=='a'){
             n = l.head;
             printf("\nElementele listei sunt : \n");
             while (n != NULL) {
-                printf("%d\t%s\n",strlen(n->word),n->word);
+                printf("\t%s\n",n->word);
                 n = n->next;
             }
-            printf("_____________________________________________________\n");
-            printf("_____________________________________________________");
     }
     else{
             n = l.tail;
@@ -116,7 +151,5 @@ void print_list(List l, char *ord) {
                 printf("\t%s\n",n->word);
                 n = n->prev;
             }
-            printf("_____________________________________________________\n");
-            printf("_____________________________________________________");
     }
 }
