@@ -15,9 +15,9 @@ int main() {
     l.tail = NULL;
 
     FILE *f=fopen("dictionary/text.txt","r");
-    //FILE *f=fopen("dictionary/text.txt","r");
     while(fgets(&buffer,255,f)){
-
+        if( buffer[strlen(buffer)-1] == '\n' )
+            buffer[strlen(buffer)-1] ='\0';
         // pentru unica aparitie a fiecarui cuvant
         //if( listSearch(&l,&buffer)==NULL ){
             n = (List_Node*) malloc(sizeof(List_Node));
@@ -28,8 +28,8 @@ int main() {
     }
     printf("Cuvintele au fost incarcate din fisier! \n\n\n");
 
-    //print_list(l);
-    //sort_list_lex(&l);
+    print_list(l,'a');
+    sort_list_len(&l);
     print_list(l,'a');
 
     List_Node *x;
@@ -39,7 +39,6 @@ int main() {
         assert(lev>=0);
         if( lev <= 1){
             printf("%d - %s",lev , x->word );
-            //break;
         }
      //printf("%s cu %d \n\n",x->word,lev);
         x = x->next;

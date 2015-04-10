@@ -11,30 +11,51 @@ List_Node* listSearch(List *l, char *k) {
 }
 
 //sorteaza lexicografic lista cu insertion sort
-void sort_list_lex( List *l ){
+void sort_list_len( List *l ){
+    int contor=0;
     List_Node *i;
     List_Node *key;
-    List_Node *key_next, *key_prev;
-    key = l->head;
-    key_next = key->next;
+    List_Node *key_next;
+    key = l->head->next;
 
     while( key != NULL){
+    key_next = key->next;
+
         i = l->head;
-        printf("%s - ", i->word);
-        while( strcmp(key->word,i->word) > 0 || key_next!=NULL || i!=key){
-            printf("%s !!!\n\n", i->word);
+        printf("\nEtapa %d \t head = %s   ||   tail = %s \n",contor++, l->head->word , l->tail->word);
+        printf("\n\tkey = %s\n", key->word);
+        while( ( strlen(key->word) > strlen(i->word) )  && i!=key){
             i = i->next;
         }
-        key->next= i;
-        if(i->prev != NULL)
-            i->prev->next=key;
-        i->prev = key;
+        printf("\ti   = %s\n", i->word);
 
-key_next = key->next;
-key_prev = key->prev;
 
-        key->next->prev = key_prev;
-        key->prev->next = key_next;
+
+        //key porneste de la head.next deci este imposibil ca prev sa fie NULL deci nu are nevoie de if
+        if(key!=i){
+            if(i->prev!=NULL)
+                i->prev->next = key;
+            else
+                l->head = key;
+
+            if(key->next!=NULL)
+                key->next->prev = key->prev;
+            else
+                l->tail = key->prev;
+            if(key->prev!=NULL)
+                key->prev->next = key->next;
+
+
+            key->prev = i->prev;
+            key->next = i;
+            i->prev = key;
+        }
+
+
+
+
+    print_list(*l,'a');
+    key = key_next;
     }
 }
 
@@ -80,20 +101,22 @@ void print_list(List l, char *ord) {
 
     if(ord=='a'){
             n = l.head;
-            printf("Elementele listei sunt : ");
+            printf("\nElementele listei sunt : \n");
             while (n != NULL) {
-                printf("%s ",n->word);
+                printf("%d\t%s\n",strlen(n->word),n->word);
                 n = n->next;
             }
-            printf("\n");
+            printf("_____________________________________________________\n");
+            printf("_____________________________________________________");
     }
     else{
             n = l.tail;
-            printf("Elementele listei sunt : ");
+            printf("\nElementele listei sunt : \n");
             while (n != NULL) {
-                printf("%s ",n->word);
+                printf("\t%s\n",n->word);
                 n = n->prev;
             }
-            printf("\n");
+            printf("_____________________________________________________\n");
+            printf("_____________________________________________________");
     }
 }

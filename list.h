@@ -4,7 +4,7 @@
 typedef struct list_node {
     struct list_node *next;
     struct list_node *prev;
-    char *word;
+    const char *word;
 } List_Node;
 // *** litere mari pt a semnala ca este un tip de date
 
@@ -18,5 +18,6 @@ void list_insert(List *l, List_Node *x);
 void list_remove(List *l, List_Node *x);
 void print_list(List l, char *ord);
 void sort_list_lex( List *l );
+void sort_list_len( List *l );
 
 #endif // LIST_H_INCLUDED
