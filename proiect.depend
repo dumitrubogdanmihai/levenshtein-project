@@ -1,20 +1,25 @@
 # depslib dependency file v1.0
-1428685131 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
+1428754485 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
 	"list.h"
+	<stdio.h>
+	<string.h>
+	<assert.h>
 
-1428691252 c:\users\bogdan\documents\github\levenshtein-project\list.h
+1428702774 c:\users\bogdan\documents\github\levenshtein-project\list.h
+	<stdbool.h>
 
-1428699591 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
+1428702829 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
 	"list.h"
 	<stdio.h>
 
-1428699539 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+1428755049 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<assert.h>
 	"list.h"
 	"levenshtein.h"
+	<stdbool.h>
 
-1428685132 c:\users\bogdan\documents\github\levenshtein-project\levenshtein.h
+1428754367 c:\users\bogdan\documents\github\levenshtein-project\levenshtein.h
 

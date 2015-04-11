@@ -1,4 +1,7 @@
 #include"list.h"
+#include<stdio.h>
+#include<string.h>
+#include <assert.h>
 
 int min_val(int a, int b, int c) {
     if(a < b){
@@ -56,4 +59,26 @@ int leven2(const char *s, int ls, const char *t, int lt)
         if (a > c) a = c;
 
         return a + 1;
+}
+
+
+List find_similar_words( List *dict, char word[], int changes){
+    List sim;
+    List_Node *x;
+    List_Node *aux;
+    int lev;
+    x = dict->head;
+
+    while ( x!=NULL ) {
+        lev = leven1(&word, strlen(&word), x->word, strlen(x->word));
+        assert(lev>=0);
+        if( lev <= changes){
+            aux = (List_Node*) malloc(sizeof(List_Node));
+            aux->word = (char *) malloc(sizeof( x->word ));
+            strcpy(aux->word,x->word);
+            list_insert(&sim,aux);
+        }
+        x = x->next;
+    }
+    return sim;
 }

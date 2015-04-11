@@ -1,6 +1,33 @@
 #include "list.h"
 #include <stdio.h>
 
+void load_dictionary(List *l, char file_name[], bool eliminate_duplicates  ){
+    char buffer[255];
+    FILE *f=fopen("dictionary/text.txt","r");
+    List_Node *n = NULL;
+    while(fgets(buffer,255,f)){
+        if( buffer[strlen(buffer)-1] == '\n' )
+            buffer[strlen(buffer)-1] ='\0';
+        //next time use short-circuit property
+        // pentru unica aparitie a fiecarui cuvant
+        if(eliminate_duplicates){
+            if( listSearch(l,&buffer)==NULL ){
+                n = (List_Node*) malloc(sizeof(List_Node));
+                n->word = (char *)  malloc(sizeof(buffer));
+                strcpy(n->word,buffer);
+                list_insert(l,n);
+            }
+        }
+        else{
+                n = (List_Node*) malloc(sizeof(List_Node));
+                n->word = (char *)  malloc(sizeof(buffer));
+                strcpy(n->word,buffer);
+                list_insert(l,n);
+        }
+    }
+    fclose(f);
+}
+
 List_Node* listSearch(List *l, char *k) {
     List_Node *x;
     x = l->head;
@@ -95,6 +122,7 @@ void sort_list_lex( List *l ){
 }
 
 void list_insert(List *l, List_Node *x) {
+
     if(l->head==NULL){
         l->head = x;
         l->tail= x;
@@ -109,8 +137,6 @@ void list_insert(List *l, List_Node *x) {
         l->tail->next = x;
         l->tail = x;
     }
-
-
 //    x->next = l->head;
 //    if (l->head != NULL) {
 //        l->head->prev = x;
