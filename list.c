@@ -1,9 +1,10 @@
 #include "list.h"
 #include <stdio.h>
 
-void load_dictionary(List *l, char file_name[], bool eliminate_duplicates  ){
+List load_dictionary(char file_name[], bool eliminate_duplicates ){
+    List l;
     char buffer[255];
-    FILE *f=fopen("dictionary/text.txt","r");
+    FILE *f=fopen(file_name,"r");
     List_Node *n = NULL;
     while(fgets(buffer,255,f)){
         if( buffer[strlen(buffer)-1] == '\n' )
@@ -11,21 +12,22 @@ void load_dictionary(List *l, char file_name[], bool eliminate_duplicates  ){
         //next time use short-circuit property
         // pentru unica aparitie a fiecarui cuvant
         if(eliminate_duplicates){
-            if( listSearch(l,&buffer)==NULL ){
+            if( listSearch(&l,&buffer)==NULL ){
                 n = (List_Node*) malloc(sizeof(List_Node));
                 n->word = (char *)  malloc(sizeof(buffer));
                 strcpy(n->word,buffer);
-                list_insert(l,n);
+                list_insert(&l,n);
             }
         }
         else{
                 n = (List_Node*) malloc(sizeof(List_Node));
                 n->word = (char *)  malloc(sizeof(buffer));
                 strcpy(n->word,buffer);
-                list_insert(l,n);
+                list_insert(&l,n);
         }
     }
     fclose(f);
+    return l;
 }
 
 List_Node* listSearch(List *l, char *k) {

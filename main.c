@@ -7,39 +7,28 @@
 #include <stdbool.h>
 
 int main() {
-    char word[80]="CERNEALA";
+    char word[80]="cafea";
+    char dict_path[]="dictionary/text.txt";
+    int changes = 2;
+    List l_dict;
+    List sim_words;
+    l_dict.head = NULL;
+    l_dict.tail = NULL;
+    sim_words.head = NULL;
+    sim_words.tail = NULL;
 
-    int changes = 1;
-    List l;
-    List similar_words;
-    l.head = NULL;
-    l.tail = NULL;
-    similar_words.head = NULL;
-    similar_words.tail = NULL;
+    l_dict = load_dictionary(dict_path,false);
 
-    load_dictionary(&l,"dictionary/rodex.txt",false);
-    printf("originala:\n");
-    print_list(l,'a');
+    printf("\tLista cuvinte originala:\n");
+    print_list(l_dict,'a');
 
-    sort_list_len(&l);
-    printf("ordonata:\n");
-    print_list(l,'a');
+    sort_list_len(&l_dict);
+    printf("\n\n\tLista cuvinte ordonata:\n");
+    print_list(l_dict,'a');
 
-    similar_words = find_similar_words(&l, word, changes);
-    printf("lev:\n");
-    print_list(similar_words,'a');
-//
-//    List_Node *x;
-//    x = l.head;
-//    while ( x!=NULL ) {
-//        lev = leven1(word, strlen(word), x->word, strlen(x->word));
-//        assert(lev>=0);
-//        if( lev <= 1){
-//            printf("%d - %s",lev , x->word );
-//        }
-//        //sprintf("%s cu %d \n\n",x->word,lev);
-//        x = x->next;
-//    }    printf("\n\nS-a executat functia lev pt toate cuvintele!");
+    sim_words = find_similar_words(&l_dict, word, changes);
+    printf("\n\n\tLista cuvintelor asemanatoare cu \"%s\" cu maxim %d modificari:\n", word, changes);
+    print_list(sim_words,'a');
 
     getchar();
     return 0;

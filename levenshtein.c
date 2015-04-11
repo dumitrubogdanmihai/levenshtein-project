@@ -70,7 +70,7 @@ List find_similar_words( List *dict, char word[], int changes){
     x = dict->head;
 
     while ( x!=NULL ) {
-        lev = leven1(&word, strlen(&word), x->word, strlen(x->word));
+        lev = leven1(word, strlen(word), x->word, strlen(x->word));
         assert(lev>=0);
         if( lev <= changes){
             aux = (List_Node*) malloc(sizeof(List_Node));

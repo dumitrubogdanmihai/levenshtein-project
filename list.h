@@ -20,6 +20,6 @@ void list_remove(List *l, List_Node *x);
 void print_list(List l, char *ord);
 void sort_list_lex( List *l );
 void sort_list_len( List *l );
-void load_dictionary(List *l, char file_name[], bool eliminate_duplicates  );
+List load_dictionary(char file_name[], bool eliminate_duplicates );
 
 #endif // LIST_H_INCLUDED
