@@ -1,8 +1,10 @@
 #include "list.h"
 #include <stdio.h>
+#include <string.h>
 
 List load_dictionary(char file_name[], bool eliminate_duplicates ){
     List l;
+    l.head =NULL;
     char buffer[255];
     FILE *f=fopen(file_name,"r");
     List_Node *n = NULL;
@@ -12,7 +14,7 @@ List load_dictionary(char file_name[], bool eliminate_duplicates ){
         //next time use short-circuit property
         // pentru unica aparitie a fiecarui cuvant
         if(eliminate_duplicates){
-            if( listSearch(&l,&buffer)==NULL ){
+            if( listSearch(&l,buffer)==NULL ){
                 n = (List_Node*) malloc(sizeof(List_Node));
                 n->word = (char *)  malloc(sizeof(buffer));
                 strcpy(n->word,buffer);
@@ -49,6 +51,7 @@ void sort_list_len( List *l ){
     while( key != NULL){
     key_next = key->next;
 
+        // a se porni de la key->prev; pentru a avea o sortare rapida in situatia in care sunt majoritatea elementelor sortate
         i = l->head;
         while( ( strlen(key->word) > strlen(i->word) )  && i!=key){
        // while( strcmp(i->word,key->word) < 0  && i!=key){
@@ -139,12 +142,6 @@ void list_insert(List *l, List_Node *x) {
         l->tail->next = x;
         l->tail = x;
     }
-//    x->next = l->head;
-//    if (l->head != NULL) {
-//        l->head->prev = x;
-//    }
-//    l->head = x;
-//    x->prev = NULL;
 }
 
 void list_remove(List *l,List_Node *x) {
@@ -160,6 +157,7 @@ void list_remove(List *l,List_Node *x) {
     else {
         l->tail = x->prev;
     }
+    free(x);
 }
 
 void print_list(List l, char *ord) {

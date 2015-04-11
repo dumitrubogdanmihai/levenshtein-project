@@ -5,7 +5,8 @@
 typedef struct list_node {
     struct list_node *next;
     struct list_node *prev;
-    const char *word;
+//    const char *word;
+    char *word;
 } List_Node;
 // *** litere mari pt a semnala ca este un tip de date
 

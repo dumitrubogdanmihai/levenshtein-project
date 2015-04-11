@@ -1,4 +1,5 @@
-#include"list.h"
+#include "list.h"
+#include "tools.h"
 #include<stdio.h>
 #include<string.h>
 #include <assert.h>
@@ -22,14 +23,15 @@ int min_val(int a, int b, int c) {
 int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){
     unsigned int m[50][50];
     int i,j;
+//    int k,l;
 
     for(i=0;i<lena;i++)
         m[i][0]=i;
     for(j=0;j<lenb;j++)
         m[0][j]=j;
 
-    for(i=0;i<lena;i++){
-        for(j=0;j<lenb;j++){
+    for(i=0;i<lena-1;i++){
+        for(j=0;j<lenb-1;j++){
             if(a[i]==b[j]){
                 m[i+1][j+1]=m[i][j];
             }
@@ -37,8 +39,16 @@ int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){
                 m[i+1][j+1]=min_val(m[i][j], m[i][j+1], m[i+1][j]) + 1;
             }
         }
+//        //afisare matrice
+//        for(k=0;k<lena;k++){
+//            for(l=0;l<lenb;l++){
+//                printf("%d ",m[k][l]);
+//            }
+//            printf("\n");
+//        }
+//        printf("\n");
     }
-    return m[lena][lenb];
+    return m[lena-1][lenb-1];
 }
 
 // recursiv
@@ -62,14 +72,17 @@ int leven2(const char *s, int ls, const char *t, int lt)
 }
 
 
-List find_similar_words( List *dict, char word[], int changes){
+List find_similar_words( char word[], int changes, List_Node *start, List_Node *stop ){
     List sim;
+    sim.head = NULL;
+    sim.tail = NULL;
     List_Node *x;
     List_Node *aux;
     int lev;
-    x = dict->head;
 
-    while ( x!=NULL ) {
+    x = start;
+
+    while ( x!=NULL && x->prev != stop) {
         lev = leven1(word, strlen(word), x->word, strlen(x->word));
         assert(lev>=0);
         if( lev <= changes){
