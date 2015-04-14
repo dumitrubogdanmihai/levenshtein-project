@@ -15,12 +15,17 @@ typedef struct list {
     struct list_node *tail;
 } List;
 
-List_Node* listSearch(List *l,char *k);
-void list_insert(List *l, List_Node *x);
-void list_remove(List *l, List_Node *x);
-void print_list(List l, char *ord);
-void sort_list_lex( List *l );
-void sort_list_len( List *l );
+
 List load_dictionary(char file_name[], bool eliminate_duplicates );
+List_Node* listSearch(List *l, char *k);
+void index_lex(List* l, List_Node* index[] );
+void index_len(List* l, List_Node* index[], int* max_len );
+//sorteaza dupa numarul de caractere cu insertion sort
+void sort_list_len( List *l );
+//sorteaza lexicografic lista cu insertion sort
+void sort_list_lex( List *l );
+void list_insert(List *l, List_Node *x);
+void list_remove(List *l,List_Node *x);
+void print_list(List l, char *ord);
 
 #endif // LIST_H_INCLUDED

@@ -1,5 +1,4 @@
 #include "list.h"
-#include "tools.h"
 #include<stdio.h>
 #include<string.h>
 #include <assert.h>
@@ -52,8 +51,7 @@ int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){
 }
 
 // recursiv
-int leven2(const char *s, int ls, const char *t, int lt)
-{
+int leven2(const char *s, int ls, const char *t, int lt){
         int a, b, c;
 
         if (!ls) return lt;

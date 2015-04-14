@@ -41,6 +41,45 @@ List_Node* listSearch(List *l, char *k) {
     return x;
 }
 
+void index_lex(List* l, List_Node* index[] ) {
+    int k;
+    char last_ch=NULL;
+    List_Node *i = l->head;
+
+    for(k=0;k<=25;k++){
+        index[k]=NULL;
+    }
+
+    while ( i!=NULL ) {
+        if(last_ch != i->word[0] ){
+            last_ch = i->word[0];
+            index[ (int)(tolower(last_ch))-97 ] = i;
+        }
+        i = i->next;
+    }
+}
+
+void index_len(List* l, List_Node* index[], int* max_len ) {
+    int len;
+    int k;
+    int last_len=0;
+    List_Node *i = l->head;
+
+    for(k=0;k<=39;k++){
+        index[k]=NULL;
+    }
+
+    while ( i!=NULL ) {
+        len = strlen(i->word);
+        if(  len != last_len ){
+            index[ len ] = i;
+            *max_len = len;
+            last_len = len;
+        }
+        i = i->next;
+    }
+}
+
 //sorteaza dupa numarul de caractere cu insertion sort
 void sort_list_len( List *l ){
     List_Node *i;
@@ -84,6 +123,7 @@ void sort_list_len( List *l ){
     key = key_next;
     }
 }
+
 //sorteaza lexicografic lista cu insertion sort
 void sort_list_lex( List *l ){
     List_Node *i;
@@ -160,22 +200,39 @@ void list_remove(List *l,List_Node *x) {
     free(x);
 }
 
+void save_list(List* l, char file_name[]) {
+    List_Node *i=l->head;
+    char file_path[100]="\dictionary\\";
+    strcat(file_path,file_name);
+    FILE* f=fopen(file_path, "w");
+    while (i != NULL) {
+        fprintf(f,"%s\n",i->word);
+        i = i->next;
+    }
+    fclose(f);
+}
+
 void print_list(List l, char *ord) {
-    List_Node *n;
-    if(ord=='a'){
-            n = l.head;
-            printf("\nElementele listei sunt : \n");
-            while (n != NULL) {
-                printf("\t%s\n",n->word);
-                n = n->next;
-            }
+    if(l.head == NULL){
+        printf(" Lista este vida!\n");
     }
     else{
-            n = l.tail;
-            printf("\nElementele listei sunt : \n");
-            while (n != NULL) {
-                printf("\t%s\n",n->word);
-                n = n->prev;
-            }
+        List_Node *n;
+        if(ord=='a'){
+                n = l.head;
+                printf(" Elementele listei sunt : \n");
+                while (n != NULL) {
+                    printf("   %s\n",n->word);
+                    n = n->next;
+                }
+        }
+        else{
+                n = l.tail;
+                printf(" Elementele listei sunt : \n");
+                while (n != NULL) {
+                    printf("   %s\n",n->word);
+                    n = n->prev;
+                }
+        }
     }
 }
