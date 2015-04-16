@@ -1,0 +1,112 @@
+ABAJ'UR             N   1       
+ABAJ'UR             N   24      
+ABAND'ON            N   24       
+ABNEG'A             VT  78      
+BALANGA'IRE         F   107     
+BALANGA'IT          A   2       
+BALANGAN'I          VT  401     
+BALANGAN'IRE        F   107     
+BALANGAN'IT         A   2       
+CAN'ISTRA           F   1       
+CANISTR'ELA         F   1       
+CAN'I?              M   1       
+CAN'I?A             F   1       
+CAN'I?IE            F   135     S
+DECOFR'ARE          F   113     
+DECOFR'AT           A   2       
+DECOL'A             V   201     
+DECOL'ARE           F   113     
+DECOLET'A           VT  201     
+DECOLET'ARE         F   113     
+DECOLET'AT          A   2       
+DECOLMAT'A          VT  201     
+DECOLMAT'AJ         N   1       
+FAN'ATIC            A   10      
+GÂTL'EJ             N   24      
+GÂT'OS              A   51      
+GÂTU'I              VT  343     
+GÂTU'IRE            F   107     
+GÂTU'IT             A   2       
+GÂTUIT'OR           N   11      
+IMANENT'IST         A   6       
+IMAN'EN?A           F   1       
+IM'A?               N   24      
+IMATERI'AL          A   1       
+IMATERIAL'ISM       N   29      S
+IMATERIAL'IST       A   6       
+IMATERIALIT'ATE     F   117     S
+IMATERIALIZ'A       VT  201     
+IMATERIALIZ'ARE     F   113     
+JUPIT'OR            A   66      
+JUP'ON              N   11      
+JUPU'I              VT  345     
+JUPUI'ALA           F   58      
+JUPU'IRE            F   107     
+JUPU'IT             A   2       
+JUPUIT'OR           A   66      
+LIMNIM'ETRU         N   37      
+LIMNOL'OG           MF  11      
+LIMNOLOG'IE         F   134     S
+LIMON'ADA           F   1       
+LIMONAG'IU          M   69      
+LIMON'ATA           F   1       
+LIM'ONIE            F   135     
+MANIER'AT           A   2       
+MANI'ERA            F   1       
+MANI'ERE            F   107     
+MANIER'ISM          N   29      S
+MANIER'IST          A   6       
+NAT'URA             F   43      
+NATUR'ISM           N   29      S
+NATUR'IST           A   6       
+N'A?IE              F   135     
+NA?ION'AL           A   1       
+NA?IONALIC'ESC      A   83      
+NA?IONAL'ISM        N   29      S
+NA?IONAL'IST        A   6       
+NA?IONALIT'ATE      F   117     
+NA?IONALIZ'A        VT  201     
+OBIECTU'AL          A   1       
+OBI'EC?IE           F   135     
+OBIEC?I'UNE         F   107     
+OBIEL'U?A           F   1       
+OBIJDU'I            VT  408     
+PEN'UMBRA           F   1       
+PENUR'IE            F   134     S
+PE'ON               M   1       
+PEON'AJ             N   29      S
+PEP'ELEA            M   55      S
+PEPEN'AR            M   1       
+PEPEN'A?            M   1       
+RATIFIC'AT          A   2       
+RATIFIC'A?IE        F   135     
+RATIN'A             VT  201     
+RATIN'ARE           F   113     
+RATIN'AT            A   2       
+SC'ALA              F   1       
+SC'ALD              M   5       
+SC'ALDA             F   1       
+SCAL'EN             A   1       
+SCALI'OLA           F   1       
+SCALOGR'AMA         F   1       
+SC'ALP              N   24      
+TRANS               I   1       
+TRANSAFRIC'AN       A   1       
+TRANSALP'IN         A   1       
+TRANSAMAZONI'AN     A   21      
+TRANSAMIN'ARE       F   113     
+TRANSAR'ABIC        A   10      
+UMER'A?             N   1       
+UMER'I              V   401     
+UMER'IRE            F   107     
+UMER'OS             A   51      
+UMEZE'ALA           F   54      
+UMEZ'I              VT  401     
+UMEZ'IRE            F   107     
+UMEZ'IT             A   2       
+ZBÂRNÂITO'ARE       F   116     
+ZBÂRNÂIT'OR         A   66      
+ZBÂRNÂIT'URA        F   43      
+ZB'ÂRRR             I   1       
+ZB'EG               N   24      
+ZB'ENG              N   24      

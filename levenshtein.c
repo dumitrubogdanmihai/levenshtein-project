@@ -17,9 +17,7 @@ int min_val(int a, int b, int c) {
             return c;
     }
 }
-
-// iterativ
-int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){
+int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){// iterativ
     unsigned int m[50][50];
     int i,j;
 //    int k,l;
@@ -49,9 +47,7 @@ int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){
     }
     return m[lena-1][lenb-1];
 }
-
-// recursiv
-int leven2(const char *s, int ls, const char *t, int lt){
+int leven2(const char *s, int ls, const char *t, int lt){// recursiv
         int a, b, c;
 
         if (!ls) return lt;
@@ -68,8 +64,6 @@ int leven2(const char *s, int ls, const char *t, int lt){
 
         return a + 1;
 }
-
-
 List find_similar_words( char word[], int changes, List_Node *start, List_Node *stop ){
     List sim;
     sim.head = NULL;
