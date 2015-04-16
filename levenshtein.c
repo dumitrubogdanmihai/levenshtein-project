@@ -85,7 +85,7 @@ List find_similar_words( char word[], int changes, List_Node *start, List_Node *
         assert(lev>=0);
         if( lev <= changes){
             aux = (List_Node*) malloc(sizeof(List_Node));
-            aux->word = (char *) malloc(sizeof( x->word ));
+            aux->word = (char *) malloc(sizeof(char)*  strlen(x->word) );
             strcpy(aux->word,x->word);
             list_insert(&sim,aux);
         }

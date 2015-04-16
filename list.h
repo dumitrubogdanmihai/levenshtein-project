@@ -5,15 +5,17 @@
 typedef struct list_node {
     struct list_node *next;
     struct list_node *prev;
-//    const char *word;
     char *word;
+    char *type;
+    int code;
+    char *restr;
 } List_Node;
-// *** litere mari pt a semnala ca este un tip de date
 
 typedef struct list {
     struct list_node *head;
     struct list_node *tail;
 } List;
+
 
 
 List load_dictionary(char file_name[], bool eliminate_duplicates );

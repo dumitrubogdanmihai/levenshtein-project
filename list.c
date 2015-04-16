@@ -1,32 +1,99 @@
 #include "list.h"
 #include <stdio.h>
 #include <string.h>
+#include <windows.h>
+#include <assert.h>
+
+//List load_dictionary(char file_name[], bool eliminate_duplicates ){
+//    List l;
+//    l.head =NULL;
+//    char buffer[255];
+//    FILE *f=fopen(file_name,"r");
+//    List_Node *n = NULL;
+//    while(fgets(buffer,255,f)){
+//        if( buffer[strlen(buffer)-1] == '\n' )
+//            buffer[strlen(buffer)-1] ='\0';
+//        //next time use short-circuit property
+//        // pentru unica aparitie a fiecarui cuvant
+//        if(eliminate_duplicates){
+//            if( listSearch(&l,buffer)==NULL ){
+//                n = (List_Node*) malloc(sizeof(List_Node));
+//                n->word = (char *)  malloc(sizeof(buffer));
+//                strcpy(n->word,buffer);
+//                list_insert(&l,n);
+//            }
+//        }
+//        else{
+//                n = (List_Node*) malloc(sizeof(List_Node));
+//                n->word = (char *)  malloc(sizeof(buffer));
+//                strcpy(n->word,buffer);
+//                list_insert(&l,n);
+//        }
+//    }
+//    fclose(f);
+//    return l;
+//}
+
 
 List load_dictionary(char file_name[], bool eliminate_duplicates ){
     List l;
     l.head =NULL;
+    l.tail =NULL;
     char buffer[255];
+    char* p;
     FILE *f=fopen(file_name,"r");
+    assert(f!=NULL);
     List_Node *n = NULL;
+
     while(fgets(buffer,255,f)){
-        if( buffer[strlen(buffer)-1] == '\n' )
-            buffer[strlen(buffer)-1] ='\0';
-        //next time use short-circuit property
-        // pentru unica aparitie a fiecarui cuvant
-        if(eliminate_duplicates){
-            if( listSearch(&l,buffer)==NULL ){
-                n = (List_Node*) malloc(sizeof(List_Node));
-                n->word = (char *)  malloc(sizeof(buffer));
-                strcpy(n->word,buffer);
-                list_insert(&l,n);
-            }
+        if(buffer[ strlen(buffer)-1] == '\n')
+           buffer[strlen(buffer)-1] = '\0';
+//        puts("______________________________________________________");
+//        puts("______________________________________________________");
+//        printf("\tbuffer : \"%s\"\n",buffer);
+
+        n = (List_Node*) malloc( sizeof(List_Node) );
+
+        p=strtok(buffer," \t\n");
+if(p!=NULL){
+//        printf("p-word:   \"%s\"   len:%d\n", p,strlen(p));
+        n->word = (char *) malloc( sizeof(char)*strlen(p)+1 );
+        strcpy( n->word, p);
+//        printf("n->word=\"%s\"   len:%d\n\n",n->word,strlen(n->word));
+}
+
+        p=strtok(NULL," \t\n");
+if(p!=NULL){
+//        printf("p-type:   \"%s\"   len:%d\n", p,strlen(p));
+        n->type = (char *)  malloc( sizeof(char)*strlen(p)+1 );
+        strcpy(n->type, p);
+//        printf("n->type= \"%s\"   len:%d\n\n",n->type, strlen(n->type));
+}
+
+        p=strtok(NULL," \t\n");
+if(p!=NULL){
+        int aux=atoi(p);
+//        printf("p-type:   \"%s\"   len:%d\n", p, strlen(p));
+//        printf("atoi(p):   \"%d\" \n", aux);
+        n->code = aux;
+//        printf("n->code= \"%d\"\n\n",n->code);
+}
+
+        p=strtok(NULL," \t\n");
+//      if(p!=NULL)
+        if(p!=NULL){
+//        printf("p-type:   \"%s\"   len:%d\n", p, strlen(p));
+            n->restr = (char *) malloc(sizeof(char)*strlen(p)+1 );
+            strcpy(n->restr, p);
+//            printf("n->restr= \"%s\"   len:%d\n",n->restr,strlen(n->restr));
         }
         else{
-                n = (List_Node*) malloc(sizeof(List_Node));
-                n->word = (char *)  malloc(sizeof(buffer));
-                strcpy(n->word,buffer);
-                list_insert(&l,n);
+            n->restr = NULL;
         }
+
+//        printf("\n");
+
+        list_insert(&l,n);
     }
     fclose(f);
     return l;
@@ -231,6 +298,42 @@ void print_list(List l, char *ord) {
                 printf(" Elementele listei sunt : \n");
                 while (n != NULL) {
                     printf("   %s\n",n->word);
+                    n = n->prev;
+                }
+        }
+    }
+}
+void print_dictionary(List l, char *ord, bool extended) {
+    if(l.head == NULL){
+        printf(" Lista este vida!\n");
+    }
+    else{
+        List_Node *n;
+        if(ord=='a'){
+                n = l.head;
+                printf(" Elementele listei sunt : \n");
+                while (n != NULL) {
+                    printf("   %s",n->word);
+                    if(extended){
+                        printf("  \t%s   %d", n->type, n->code);
+                        if(n->restr!=NULL)
+                            printf("  %s", n->restr );
+                    }
+                    printf("\n");
+                    n = n->next;
+                }
+        }
+        else{
+                n = l.tail;
+                printf(" Elementele listei sunt : \n");
+                while (n != NULL) {
+                    printf("   %s",n->word);
+                    if(extended){
+                        printf("  \t%s   %d", n->type, n->code);
+                        if(n->restr!=NULL)
+                            printf("  %s", n->restr );
+                    }
+                    printf("\n");
                     n = n->prev;
                 }
         }
