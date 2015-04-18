@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <assert.h>
+#include <windows.h>
 
 List load_words(char file_name[], bool eliminate_duplicates ){
     List l;
@@ -97,15 +98,6 @@ if(p!=NULL){
     return l;
 }
 
-List_Node* listSearch(List *l, char *k) {
-    List_Node *x;
-    x = l->head;
-    while ( x!=NULL && strcmp(x->word,k)!=0 ) {
-        x = x->next;
-    }
-    return x;
-}
-
 void index_lex(List* l, List_Node* index[] ) {
     int k;
     char last_ch=NULL;
@@ -144,43 +136,49 @@ void index_len(List* l, List_Node* index[], int* max_len ) {
     }
 }
 
-void sort_list_len( List *l ){//sorteaza dupa numarul de caractere cu insertion sort
+// sorteaza TOATA lista, indiferent de ce parametrii primeste prin start si stop
+void sort_list_len( List *l, List_Node* start, List_Node* stop ){//sorteaza dupa lungimea cuvintelor lista cu insertion sort
     List_Node *i;
     List_Node *key;
     List_Node *key_next;
-    key = l->head->next;
+    key = start->next;
 
-    while( key != NULL){
+//    while( (key != NULL) && (key!= (stop->next)) ){
+    while( key != NULL ){
     key_next = key->next;
 
-        // a se porni de la key->prev; pentru a avea o sortare rapida in situatia in care sunt majoritatea elementelor sortate
-        i = l->head;
-        while( ( strlen(key->word) > strlen(i->word) )  && i!=key){
-       // while( strcmp(i->word,key->word) < 0  && i!=key){
-            i = i->next;
+        i = key->prev;
+        while( i!=NULL  &&  ( strlen(key->word) < strlen(i->word) )  ){
+            i = i->prev;
         }
+        if(key->prev != i){
+            if(i==NULL){
+                if(key == l->tail)
+                    l->tail = key->prev;
 
-        //key porneste de la head.next deci este imposibil ca prev sa fie NULL deci nu are nevoie de if
-        if(key!=i){
-
-            if(key->next==l->tail){
-                l->tail = key->prev;
-            }
-
-            if(i->prev!=NULL)
-                i->prev->next = key;
-            else
+                if(key->prev != NULL)
+                    key->prev->next = key->next;
+                if(key->next != NULL)
+                    key->next->prev = key->prev;
+                key->next = l->head;
+                key->prev = NULL;
+                l->head->prev = key;
                 l->head = key;
+            }
+            else{
+                if(key == l->tail)
+                    l->tail = key->prev;
 
-            if(key->next!=NULL)
-                key->next->prev = key->prev;
-
-            if(key->prev!=NULL)
-                key->prev->next = key->next;
-
-            key->prev = i->prev;
-            key->next = i;
-            i->prev = key;
+                if(key->next != NULL)
+                    key->next->prev = key->prev;
+                if(key->prev != NULL)
+                    key->prev->next = key->next;
+                key->next = i->next;
+                if(i->next != NULL)
+                    i->next->prev = key;
+                i->next = key;
+                key->prev = i;
+            }
         }
 
     key = key_next;
@@ -195,38 +193,52 @@ void sort_list_lex( List *l ){//sorteaza lexicografic lista cu insertion sort
     while( key != NULL){
     key_next = key->next;
 
-        i = l->head;
-        while( strcmp(i->word,key->word) < 0  && i!=key){
-            i = i->next;
+        i = key->prev;
+        while( i!=NULL  &&  ( strcmp(key->word, i->word) < 0 )  ){
+            i = i->prev;
         }
+        if(key->prev != i){
+            if(i==NULL){
+                if(key == l->tail)
+                    l->tail = key->prev;
 
-        //key porneste de la head.next deci este imposibil ca prev sa fie NULL deci nu are nevoie de if
-        if(key!=i){
-
-            if(key->next==l->tail){
-                l->tail = key->prev;
-            }
-
-            if(i->prev!=NULL)
-                i->prev->next = key;
-            else
+                if(key->prev != NULL)
+                    key->prev->next = key->next;
+                if(key->next != NULL)
+                    key->next->prev = key->prev;
+                key->next = l->head;
+                key->prev = NULL;
+                l->head->prev = key;
                 l->head = key;
+            }
+            else{
+                if(key == l->tail)
+                    l->tail = key->prev;
 
-            if(key->next!=NULL)
-                key->next->prev = key->prev;
-
-            if(key->prev!=NULL)
-                key->prev->next = key->next;
-
-            key->prev = i->prev;
-            key->next = i;
-            i->prev = key;
+                if(key->next != NULL)
+                    key->next->prev = key->prev;
+                if(key->prev != NULL)
+                    key->prev->next = key->next;
+                key->next = i->next;
+                if(i->next != NULL)
+                    i->next->prev = key;
+                i->next = key;
+                key->prev = i;
+            }
         }
 
     key = key_next;
     }
 }
 
+List_Node* listSearch(List *l, char *k) {
+    List_Node *x;
+    x = l->head;
+    while ( x!=NULL && strcmp(x->word,k)!=0 ) {
+        x = x->next;
+    }
+    return x;
+}
 void list_insert(List *l, List_Node *x) {
     if(l->head==NULL){
         l->head = x;
