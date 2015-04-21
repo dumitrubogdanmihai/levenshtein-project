@@ -12,7 +12,7 @@ typedef struct list {
     struct list_node *head;
 } List;
 
-List_Node* listSearch(List *l,char *k);
+List_Node* list_search(List *l,char *k);
 void list_insert(List *l, List_Node *x);
 void list_remove(List *l, List_Node *x);
 void print_list(List l);

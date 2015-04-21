@@ -17,7 +17,7 @@ int main() {
     while(fgets(&buffer,255,f)){
 
         // pentru unica aparitie a fiecarui cuvant
-        //if( listSearch(&l,&buffer)==NULL ){
+        //if( list_search(&l,&buffer)==NULL ){
             n = (List_Node*) malloc(sizeof(List_Node));
             n->word = malloc(sizeof(buffer));
             strcpy(n->word,buffer);

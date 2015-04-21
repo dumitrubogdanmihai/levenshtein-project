@@ -1,7 +1,7 @@
 #include "list.h"
 #include <stdio.h>
 
-List_Node* listSearch(List *l, char *k) {
+List_Node* list_search(List *l, char *k) {
     List_Node *x;
     x = l->head;
     while ( x!=NULL && strcmp(x->word,k)!=0 ) {
