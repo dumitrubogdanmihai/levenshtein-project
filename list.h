@@ -22,6 +22,9 @@ void index_lex(List* l, List_Node* index[] );
 void index_len(List* l, List_Node* index[], int* max_len ) ;
 //void sort_list_len( List *l );
 void sort_list_lex( List *l );
+
+// limitele start si stop nu functioneaza corect in toate cazurile
+void sort_list_len( List *l, List_Node* start, List_Node* stop );
 void list_insert(List *l, List_Node *x) ;
 void list_remove(List *l, List_Node *x) ;
 void save_list(List* l, char file_name[]) ;

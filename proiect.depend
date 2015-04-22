@@ -5,7 +5,7 @@
 	<string.h>
 	<assert.h>
 
-1429291634 c:\users\bogdan\documents\github\levenshtein-project\list.h
+1429702088 c:\users\bogdan\documents\github\levenshtein-project\list.h
 	<stdbool.h>
 
 1429292570 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
@@ -15,7 +15,7 @@
 	<assert.h>
 	<windows.h>
 
-1429292508 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+1429350884 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
