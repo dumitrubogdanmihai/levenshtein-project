@@ -9,7 +9,7 @@ List load_words(char file_name[], bool eliminate_duplicates ){
     l.head =NULL;
     char buffer[255];
     FILE *f=fopen(file_name,"r");
-    List_Node *n = NULL;
+    List_Node *n = NULL;          // n reprezinta noul nod al listei
     while(fgets(buffer,255,f)){
         if( buffer[strlen(buffer)-1] == '\n' )
             buffer[strlen(buffer)-1] ='\0';

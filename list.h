@@ -6,9 +6,9 @@ typedef struct list_node {
     struct list_node *next;
     struct list_node *prev;
     char *word;
-    char *type;
-    int code;
-    char *restr;
+    char *type;        //ce parte de vorbire este
+    int code;          //codul flexionarii
+    char *restr;       //reprezinta restrictiile de felexionare
 } List_Node;
 typedef struct list {
     struct list_node *head;
