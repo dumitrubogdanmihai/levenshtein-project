@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1429957980 source:d:\levenshtein distance\levenshtein-project\marja de eroare la tastare 2\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
