@@ -8,6 +8,34 @@ int min_val(int a, int b, int c);
 int gasire_litera( int *k,int *l,int i,char *cuvant,char tastatura[4][10] );
 int marja_eroare_tastatura(char *cuvant,bool *marja_eroare,char tastatura[4][10],int i,int k,int l);
 
+ int linie_litera[60]; int coloana_litera[60];
+
+void citire_tastura(char fisier[]){
+    FILE * f = fopen(fisier,"r");
+    int i,j,nr_coloane,nr_linii;
+    char ch;
+    fscanf(f,"%d%d",&nr_linii,&nr_coloane);
+    for(i=0;i<nr_linii;i++){
+        for(j=0;j<nr_coloane;j++){
+            fscanf(f,"%c",&ch);
+            linie_litera[(int)(tolower(ch))-97]=i;
+            coloana_litera[(int)(tolower(ch))-97]=j;
+        }
+    }
+    fclose(f);
+}
+
+int distanta_litera(char a, char b){
+    return (  abs(linie_litera[a-97]-linie_litera[b-97]) +  abs(coloana_litera[a-97]-coloana_litera[b-97])  );
+}
+
+int distanta_cuvinte(char * c1, char *c2){
+    int i,j,s=0;
+    for(i=0;i< min(strlen(c1),strlen(c2)) ; i++)
+        s+= distanta_litera( c1+i, c2+i );
+    return s;
+}
+
 int main()
 {
     char cuvant[100];       //cuvantul citit de la tastatura
@@ -36,13 +64,19 @@ int main()
     lungime_cuvant=strlen( cuvant );
     strlwr(cuvant);
 
-    FILE *f=fopen("in2.txt","r");
+    gets(cuvant_dex);
+    lungime_cuvant=strlen( cuvant_dex );
+    strlwr(cuvant_dex);
 
-    while( !feof(f) ){
 
-        fgets(cuvant_dex,100,f);
-        lungime_cuvant_dex=strlen( cuvant_dex );
-        strlwr(cuvant_dex);           // transforma toate literele mari ale sirului in litere mici
+
+    //FILE *f=fopen("in2.txt","r");
+
+    //while( !feof(f) ){
+
+      //  fgets(cuvant_dex,100,f);
+        //lungime_cuvant_dex=strlen( cuvant_dex );
+       // strlwr(cuvant_dex);           // transforma toate literele mari ale sirului in litere mici
 
         if( leven1(cuvant,lungime_cuvant,cuvant_dex,lungime_cuvant_dex,matrice_levenshtein) == 1 ){
             printf("\n Distanta este 1 \n");
@@ -94,9 +128,9 @@ int main()
                 getchar();
             }
         }
-    }
+    //}
 
-    fclose(f);
+//    fclose(f);
 
     //Afisare matrice levenshtein
     for( i=0;i<=lungime_cuvant;i++ ){
@@ -169,6 +203,7 @@ int marja_eroare_tastatura(char *cuvant,bool *marja_eroare,char tastatura[4][10]
 {
             char var_cuvant[100];
             int aux;
+
     for( aux=0;aux<8;aux++ ){
             //se ia litera de pe diagonala sus stanga din matricea tastatura
             FILE *fisier1=fopen("rodex.txt","r");
@@ -184,6 +219,7 @@ int marja_eroare_tastatura(char *cuvant,bool *marja_eroare,char tastatura[4][10]
                 strlwr(var_cuvant);
 
                 printf( "\n\n Cuvantul citit din fisier este : %s \n\n",var_cuvant );
+
                 //getchar();
 
 
