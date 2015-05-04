@@ -7,34 +7,36 @@ int leven1( char *a, unsigned int lena, char *b, unsigned int lenb,int m[100][10
 int min_val(int a, int b, int c);
 int gasire_litera( int *k,int *l,int i,char *cuvant,char tastatura[4][10] );
 int marja_eroare_tastatura(char *cuvant,bool *marja_eroare,char tastatura[4][10],int i,int k,int l);
+void permutare(char *cuvant, int i, int n);
+void interschimbare (char *x, char *y);
 
- int linie_litera[60]; int coloana_litera[60];
+//int linie_litera[60]; int coloana_litera[60];
+//
+//void citire_tastura(char fisier[]){
+//    FILE * f = fopen(fisier,"r");
+//    int i,j,nr_coloane,nr_linii;
+//    char ch;
+//    fscanf(f,"%d%d",&nr_linii,&nr_coloane);
+//    for(i=0;i<nr_linii;i++){
+//        for(j=0;j<nr_coloane;j++){
+//            fscanf(f,"%c",&ch);
+//            linie_litera[(int)(tolower(ch))-97]=i;
+//            coloana_litera[(int)(tolower(ch))-97]=j;
+//        }
+//    }
+//    fclose(f);
+//}
 
-void citire_tastura(char fisier[]){
-    FILE * f = fopen(fisier,"r");
-    int i,j,nr_coloane,nr_linii;
-    char ch;
-    fscanf(f,"%d%d",&nr_linii,&nr_coloane);
-    for(i=0;i<nr_linii;i++){
-        for(j=0;j<nr_coloane;j++){
-            fscanf(f,"%c",&ch);
-            linie_litera[(int)(tolower(ch))-97]=i;
-            coloana_litera[(int)(tolower(ch))-97]=j;
-        }
-    }
-    fclose(f);
-}
-
-int distanta_litera(char a, char b){
-    return (  abs(linie_litera[a-97]-linie_litera[b-97]) +  abs(coloana_litera[a-97]-coloana_litera[b-97])  );
-}
-
-int distanta_cuvinte(char * c1, char *c2){
-    int i,j,s=0;
-    for(i=0;i< min(strlen(c1),strlen(c2)) ; i++)
-        s+= distanta_litera( c1+i, c2+i );
-    return s;
-}
+//int distanta_litera(char a, char b){
+//    return (  abs(linie_litera[a-97]-linie_litera[b-97]) +  abs(coloana_litera[a-97]-coloana_litera[b-97])  );
+//}
+//
+//int distanta_cuvinte(char * c1, char *c2){
+//    int i,j,s=0;
+//    for(i=0;i< min(strlen(c1),strlen(c2)) ; i++)
+//        s+= distanta_litera( c1+i, c2+i );
+//    return s;
+//}
 
 int main()
 {
@@ -60,13 +62,18 @@ int main()
     }
     printf("\n\n");
 
+    printf( "Introduceti cuvantul dorit de la tastatura: " );
     gets(cuvant);
     lungime_cuvant=strlen( cuvant );
     strlwr(cuvant);
 
+    permutare(cuvant, 0, lungime_cuvant-1);   //interschimbarea literelor unui cuvant
+    getchar();
+
     gets(cuvant_dex);
     lungime_cuvant=strlen( cuvant_dex );
     strlwr(cuvant_dex);
+
 
 
 
@@ -461,6 +468,36 @@ int marja_eroare_tastatura(char *cuvant,bool *marja_eroare,char tastatura[4][10]
     }
 }
 
+/*
+Functia de afisare a permutarilor unui cuvant
+Aceasta functie are 3 parametrii:
+    1. Sirul de caractere
+    2. Indicele de inceput al sirului
+    3. Indicele de sfarsit al sirului
+*/
+void permutare(char *cuvant, int i, int n)
+{
+   int j;
+   if (i == n)
+     printf("%s\n", cuvant);
+   else
+   {
+        for (j = i; j <= n; j++)
+       {
+          interschimbare((cuvant+i), (cuvant+j));
+          permutare(cuvant, i+1, n);
+          interschimbare((cuvant+i), (cuvant+j));
+       }
+   }
+}
+
+void interschimbare (char *x, char *y)
+{
+    char aux;
+    aux = *x;
+    *x = *y;
+    *y = aux;
+}
 
 
 
