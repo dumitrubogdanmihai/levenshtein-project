@@ -9,9 +9,7 @@ int current_menu;// meniul care este afisat pe ecran in prezent
 typedef struct menu_strings{
     char item[10][30];  // stringurile elementelor meniului
 };
-
 struct menu_strings menu[10];   // meniurile
-
 
 void menu_up();
 void menu_down();

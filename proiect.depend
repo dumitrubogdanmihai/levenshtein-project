@@ -15,7 +15,7 @@
 	<assert.h>
 	<windows.h>
 
-1431032824 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+1431034873 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -29,11 +29,10 @@
 
 1431029866 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
 
-1431033440 c:\users\bogdan\documents\github\levenshtein-project\menu.h
+1431034594 c:\users\bogdan\documents\github\levenshtein-project\menu.h
 	<string.h>
 
-1431033365 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
-	<string.h>
+1431034309 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
 	"menu.h"
 	"functionalities.h"
 

@@ -1,6 +1,6 @@
-
 #include"menu.h"
 #include"functionalities.h"
+
 void menu_up(){
     if(highlighted_item > 0)
         highlighted_item --;
