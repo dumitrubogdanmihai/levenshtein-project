@@ -136,7 +136,7 @@ void index_len(List* l, List_Node* index[], int* max_len ) {
     }
 }
 
-// sorteaza TOATA lista, indiferent de ce parametrii primeste prin start si stop
+// sorteaza !!!TOATA!!! lista, indiferent de ce parametrii primeste prin start si stop
 void sort_list_len( List *l, List_Node* start, List_Node* stop ){//sorteaza dupa lungimea cuvintelor lista cu insertion sort
     List_Node *i;
     List_Node *key;
