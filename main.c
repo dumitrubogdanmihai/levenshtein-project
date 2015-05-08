@@ -26,7 +26,7 @@ int main() {
             enter=true;
             menu_enter();
         }
-        Sleep(50); //kill the extra sensibility
+        Sleep(25); //kill the extra sensibility
     }
     return 0;
 }

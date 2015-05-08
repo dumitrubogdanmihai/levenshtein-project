@@ -8,7 +8,7 @@ void from_file(){
     printf("from file function ");
     Sleep(1500);
 }
-void live_imput(){
-    printf("live_imput function ");
+void live_input(){
+    printf("live_input function ");
     Sleep(1500);
 }

@@ -6,6 +6,6 @@
 
 void one_word();
 void from_file();
-void live_imput();
+void live_input();
 
 #endif // FUNCTIONALITIES_H_INCLUDED
