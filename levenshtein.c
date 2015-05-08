@@ -20,15 +20,14 @@ int min_val(int a, int b, int c) {
 int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){// iterativ
     unsigned int m[50][50];
     int i,j;
-//    int k,l;
 
     for(i=0;i<lena;i++)
         m[i][0]=i;
     for(j=0;j<lenb;j++)
         m[0][j]=j;
 
-    for(i=0;i<lena-1;i++){
-        for(j=0;j<lenb-1;j++){
+    for(i=0;i<lena;i++){
+        for(j=0;j<lenb;j++){
             if(a[i]==b[j]){
                 m[i+1][j+1]=m[i][j];
             }
@@ -36,16 +35,8 @@ int leven1( char *a, unsigned int lena, char *b, unsigned int lenb ){// iterativ
                 m[i+1][j+1]=min_val(m[i][j], m[i][j+1], m[i+1][j]) + 1;
             }
         }
-//        //afisare matrice
-//        for(k=0;k<lena;k++){
-//            for(l=0;l<lenb;l++){
-//                printf("%d ",m[k][l]);
-//            }
-//            printf("\n");
-//        }
-//        printf("\n");
     }
-    return m[lena-1][lenb-1];
+    return m[lena][lenb];
 }
 int leven2(const char *s, int ls, const char *t, int lt){// recursiv
         int a, b, c;
@@ -64,10 +55,9 @@ int leven2(const char *s, int ls, const char *t, int lt){// recursiv
 
         return a + 1;
 }
-List find_similar_words( char word[], int changes, List_Node *start, List_Node *stop ){
-    List sim;
-    sim.head = NULL;
-    sim.tail = NULL;
+void find_similar_words( List* l_sim, char word[], int changes, List_Node *start, List_Node *stop ){
+    l_sim->head = NULL;
+    l_sim->tail = NULL;
     List_Node *x;
     List_Node *aux;
     int lev;
@@ -81,9 +71,8 @@ List find_similar_words( char word[], int changes, List_Node *start, List_Node *
             aux = (List_Node*) malloc(sizeof(List_Node));
             aux->word = (char *) malloc(sizeof(char)*  strlen(x->word) );
             strcpy(aux->word,x->word);
-            list_insert(&sim,aux);
+            list_insert(l_sim,aux);
         }
         x = x->next;
     }
-    return sim;
 }

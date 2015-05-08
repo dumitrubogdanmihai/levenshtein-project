@@ -1,21 +1,21 @@
 # depslib dependency file v1.0
-1431020717 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
+1431106565 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
 	"list.h"
 	<stdio.h>
 	<string.h>
 	<assert.h>
 
-1431020717 c:\users\bogdan\documents\github\levenshtein-project\list.h
+1431104215 c:\users\bogdan\documents\github\levenshtein-project\list.h
 	<stdbool.h>
 
-1431029405 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
+1431106257 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
 	"list.h"
 	<stdio.h>
 	<string.h>
 	<assert.h>
 	<windows.h>
 
-1431034873 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+1431104137 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -27,14 +27,18 @@
 
 1428770663 c:\users\bogdan\documents\github\levenshtein-project\tools.h
 
-1431036574 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
+1431106643 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
+	"list.h"
+	<windows.h>
+	<stdio.h>
 
-1431079797 c:\users\bogdan\documents\github\levenshtein-project\menu.h
+1431104341 c:\users\bogdan\documents\github\levenshtein-project\menu.h
 	<string.h>
 
-1431080046 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
-	"menu.h"
+1431104268 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
 	"functionalities.h"
+	"menu.h"
+	<conio.h>
 
-1431036573 c:\users\bogdan\documents\github\levenshtein-project\functionalities.h
+1431086541 c:\users\bogdan\documents\github\levenshtein-project\functionalities.h
 

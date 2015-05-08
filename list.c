@@ -4,36 +4,47 @@
 #include <assert.h>
 #include <windows.h>
 
+void build_dictionaries(){ // pe viitor functia aceasta ar fi bine sa o mutam in list.c
+    l_dict_lex = load_words("dictionary/wordsEnLex.txt",false);
+    index_lex(&l_dict_lex, ind_lex);
+
+    l_dict_len = load_words("dictionary/wordsEnLen.txt",false);
+    index_len(&l_dict_len, ind_len, &max_len);
+}
+
 List load_words(char file_name[], bool eliminate_duplicates ){
     List l;
     l.head =NULL;
     char buffer[255];
     FILE *f=fopen(file_name,"r");
     List_Node *n = NULL;          // n reprezinta noul nod al listei
-    while(fgets(buffer,255,f)){
-        if( buffer[strlen(buffer)-1] == '\n' )
-            buffer[strlen(buffer)-1] ='\0';
-        //next time use short-circuit property
-        // pentru unica aparitie a fiecarui cuvant
-        if(eliminate_duplicates){
+
+    if(eliminate_duplicates){ // pentru rapiditatea citirii datelor am scos acest if in afara while-ului
+        while(fgets(buffer,255,f)){
             if( listSearch(&l,buffer)==NULL ){
+                if(buffer[strlen(buffer)-1]=='\n')
+                    buffer[strlen(buffer)-1]='\0';
                 n = (List_Node*) malloc(sizeof(List_Node));
                 n->word = (char *)  malloc(sizeof(buffer));
                 strcpy(n->word,buffer);
                 list_insert(&l,n);
             }
         }
-        else{
-                n = (List_Node*) malloc(sizeof(List_Node));
-                n->word = (char *)  malloc(sizeof(buffer));
-                strcpy(n->word,buffer);
-                list_insert(&l,n);
+    }
+    else{
+         while(fgets(buffer,255,f)){
+            if(buffer[strlen(buffer)-1]=='\n')
+                buffer[strlen(buffer)-1]='\0';
+            n = (List_Node*) malloc(sizeof(List_Node));
+            n->word = (char *)  malloc(sizeof(buffer));
+            strcpy(n->word,buffer);
+            list_insert(&l,n);
         }
     }
     fclose(f);
     return l;
 }
-List load_dictionary(char file_name[], bool eliminate_duplicates ){
+List load_dictionary(char file_name[], bool eliminate_duplicates ){ // doar pt limba romana
     List l;
     l.head =NULL;
     List_Node *n = NULL;
@@ -138,15 +149,15 @@ void index_len(List* l, List_Node* index[], int* max_len ) {
 
 // sorteaza !!!TOATA!!! lista, indiferent de ce parametrii primeste prin start si stop
 void sort_list_len( List *l, List_Node* start, List_Node* stop ){//sorteaza dupa lungimea cuvintelor lista cu insertion sort
-    List_Node *i;
-    List_Node *key;
-    List_Node *key_next;
+    register List_Node *i;
+    register List_Node *key;
+    register List_Node *key_next;
     key = start->next;
 
 //    while( (key != NULL) && (key!= (stop->next)) ){
     while( key != NULL ){
-    key_next = key->next;
-
+        key_next = key->next;
+        printf("%c\n",key->word[0]);
         i = key->prev;
         while( i!=NULL  &&  ( strlen(key->word) < strlen(i->word) )  ){
             i = i->prev;
@@ -180,14 +191,13 @@ void sort_list_len( List *l, List_Node* start, List_Node* stop ){//sorteaza dupa
                 key->prev = i;
             }
         }
-
     key = key_next;
     }
 }
 void sort_list_lex( List *l ){//sorteaza lexicografic lista cu insertion sort
-    List_Node *i;
-    List_Node *key;
-    List_Node *key_next;
+    register List_Node *i;
+    register List_Node *key;
+    register List_Node *key_next;
     key = l->head->next;
 
     while( key != NULL){
@@ -310,7 +320,7 @@ void print_list( List_Node* start, List_Node* stop) {
 
         n = start;
         while (n != stop->next) {
-            printf(" %s\n",n->word);
+            printf("  %s\n",n->word);
             n = n->next;
         }
     }

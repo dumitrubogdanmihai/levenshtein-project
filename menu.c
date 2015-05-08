@@ -1,6 +1,6 @@
-#include"menu.h"
 #include"functionalities.h"
-
+#include"menu.h"
+#include<conio.h>
 void menu_up(){
     if(highlighted_item > 0)
         highlighted_item --;
@@ -54,19 +54,21 @@ void menu_enter(){
             break;
         }
     }
+    print_menu();
 }
 void print_menu(){
     int i,j;
     system("cls");
+//    system("clear"); unix
     printf("\n\n\n\t");
     for(i=0; i<menu[current_menu].nr_items; i++, printf("\n\t"))
         for(j=0; j<strlen(menu[current_menu].item[i]); j++)
-            // daca elementul din meniu pe care doresc sa-l afisez este egal cu elementul subliniat atunci se evidentiaza cu cate un spatiu intre literele sale
-            // pe viitor am putea sa-l evidentiem colorandu-l intr-o culoare aparte
             if(highlighted_item == i)
                 printf(" %c", menu[current_menu].item[i][j]);
             else
                 printf("%c", menu[current_menu].item[i][j]);
+            // daca elementul din meniu pe care doresc sa-l afisez este egal cu elementul subliniat atunci se evidentiaza cu cate un spatiu intre literele sale
+            // pe viitor am putea sa-l evidentiem colorandu-l intr-o culoare aparte
 }
 void build_menu(){
     // se atribuie variabilelor aferente meniului valorile si stringurile corespunzatoare
@@ -79,4 +81,5 @@ void build_menu(){
     strcpy( menu[0].item[1] , "From file" );
     strcpy( menu[0].item[2] , "Live input" );
     strcpy( menu[0].item[3] , "Options" );
-    strcpy( menu[0].item[4] , "Quit" );}
+    strcpy( menu[0].item[4] , "Quit" );
+}

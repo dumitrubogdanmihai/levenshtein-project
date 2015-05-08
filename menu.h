@@ -5,11 +5,11 @@
 int highlighted_item;// elementul activ, a carui functionalitate se activeaza la apasarea tastei enter
 int current_menu;// meniul care este afisat pe ecran in prezent
 
-typedef struct menu_strings{
+typedef struct one_menu{
     int nr_items;
     char item[10][30];  // stringurile elementelor meniului
 };
-struct menu_strings menu[10];   // meniurile
+struct one_menu menu[10];   // meniurile
 
 void menu_up();
 void menu_down();
