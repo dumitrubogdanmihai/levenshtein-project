@@ -76,3 +76,50 @@ void find_similar_words( List* l_sim, char word[], int changes, List_Node *start
         x = x->next;
     }
 }
+
+void sort_list_lev( List *l , char* word){//sorteaza lexicografic lista cu insertion sort
+    register List_Node *i;
+    register List_Node *key;
+    register List_Node *key_next;
+    key = l->head->next;
+
+    while( key != NULL){
+    key_next = key->next;
+
+        i = key->prev;
+        while( i!=NULL  &&  leven1(word,strlen(word),key->word,strlen(key->word)) < leven1(word, strlen(word), i->word, strlen(i->word)) ){
+            i = i->prev;
+        }
+        if(key->prev != i){
+            if(i==NULL){
+                if(key == l->tail)
+                    l->tail = key->prev;
+
+                if(key->prev != NULL)
+                    key->prev->next = key->next;
+                if(key->next != NULL)
+                    key->next->prev = key->prev;
+                key->next = l->head;
+                key->prev = NULL;
+                l->head->prev = key;
+                l->head = key;
+            }
+            else{
+                if(key == l->tail)
+                    l->tail = key->prev;
+
+                if(key->next != NULL)
+                    key->next->prev = key->prev;
+                if(key->prev != NULL)
+                    key->prev->next = key->next;
+                key->next = i->next;
+                if(i->next != NULL)
+                    i->next->prev = key;
+                i->next = key;
+                key->prev = i;
+            }
+        }
+
+    key = key_next;
+    }
+}

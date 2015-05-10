@@ -43,9 +43,9 @@ void live_input(){
         continue;
 
     printf("\n\t\tLive_input function ");
-    printf("\n\t\tPress ESC to exit");
+    printf("\n\t\tPress ESC to exit\n");
     while(1){
-        printf("\n\n Word:");
+        printf(" Word:");
         word[0]='\0';
         ch[0]='\0';
         while(ch[0]!=' '){
@@ -59,8 +59,14 @@ void live_input(){
         }
         if(word[strlen(word)-1]==' ')
             word[strlen(word)-1]='\0';
-        printf("\n Cuvantul format  este: \"%s\"\n",word);
+//        printf("\n Cuvantul format  este: \"%s\"\n",word);
         find_similar_words(&sim_words, word, 1, l_dict_lex.head, l_dict_lex.tail);
-        print_list(sim_words.head, sim_words.tail);
+//        print_list(sim_words.head, sim_words.tail);
+        sort_list_lev(&sim_words, word);
+//printf("\"%s\"\n",)
+        if(strcmp(sim_words.head->word,word)==0)
+            printf(" - Cuvant Corect!\n");
+        else
+           print_list(sim_words.head, sim_words.tail);
     }
 }

@@ -25,7 +25,7 @@ List load_words(char file_name[], bool eliminate_duplicates ){
                 if(buffer[strlen(buffer)-1]=='\n')
                     buffer[strlen(buffer)-1]='\0';
                 n = (List_Node*) malloc(sizeof(List_Node));
-                n->word = (char *)  malloc(sizeof(buffer));
+                n->word = (char *)  malloc(sizeof(char)*strlen(buffer)+1);
                 strcpy(n->word,buffer);
                 list_insert(&l,n);
             }
@@ -36,7 +36,7 @@ List load_words(char file_name[], bool eliminate_duplicates ){
             if(buffer[strlen(buffer)-1]=='\n')
                 buffer[strlen(buffer)-1]='\0';
             n = (List_Node*) malloc(sizeof(List_Node));
-            n->word = (char *)  malloc(sizeof(buffer));
+            n->word = (char *)  malloc(sizeof(char)*strlen(buffer)+1);
             strcpy(n->word,buffer);
             list_insert(&l,n);
         }
@@ -241,6 +241,7 @@ void sort_list_lex( List *l ){//sorteaza lexicografic lista cu insertion sort
     }
 }
 
+
 List_Node* listSearch(List *l, char *k) {
     List_Node *x;
     x = l->head;
@@ -316,28 +317,43 @@ void print_list( List_Node* start, List_Node* stop) {
     }
     else{
         List_Node *n;
-        printf(" Elementele listei sunt : \n");
+        printf("     Elementele listei sunt : \n");
 
         n = start;
         while (n != stop->next) {
-            printf("  %s\n",n->word);
+            printf("      %s\n",n->word);
             n = n->next;
         }
     }
 }
-void print_dictionary( List_Node* start, List_Node* stop) {
-    if(start == NULL){
-        printf(" Lista este vida!\n");
-    }
-    else{
-        List_Node *n;
-        printf(" Elementele listei sunt : \n");
-
-        n = start;
-
-        while (n != stop->next) {
-            printf(" %s\t %s\t %d\t %s\n",n->word, n->type, n->code, n->restr );
-            n = n->next;
-        }
-    }
-}
+//void print_list(List* l) {
+//    if(start == NULL){
+//        printf(" Lista este vida!\n");
+//    }
+//    else{
+//        List_Node *n;
+//        printf(" Elementele listei sunt : \n");
+//
+//        n = start;
+//        while (n != stop->next) {
+//            printf("  %s\n",n->word);
+//            n = n->next;
+//        }
+//    }
+//}
+//void print_dictionary( List_Node* start, List_Node* stop) {
+//    if(start == NULL){
+//        printf(" Lista este vida!\n");
+//    }
+//    else{
+//        List_Node *n;
+//        printf(" Elementele listei sunt : \n");
+//
+//        n = start;
+//
+//        while (n != stop->next) {
+//            printf(" %s\t %s\t %d\t %s\n",n->word, n->type, n->code, n->restr );
+//            n = n->next;
+//        }
+//    }
+//}
