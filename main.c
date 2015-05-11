@@ -225,6 +225,11 @@ int marja_eroare_tastatura(char *cuvant,bool *marja_eroare,char tastatura[4][10]
                 fgets(var_cuvant,100,fisier1);
                 strlwr(var_cuvant);
 
+            //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+                strcpy(var_cuvant,"cafea");
+                // sau schimba functia de citire a cuvantului.. foloseste scanf("%s"... poate merge asa...
+        // sau var_cuvant[strlen(var_cuvant)]='\0';
+        // sau var_cuvant[strlen(var_cuvant)-1]='\0';
                 printf( "\n\n Cuvantul citit din fisier este : %s \n\n",var_cuvant );
 
                 //getchar();
