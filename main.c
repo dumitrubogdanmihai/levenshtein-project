@@ -6,6 +6,10 @@
 #include "list.h"
 #include "menu.h"
 
+#include"tastatura.h"
+#include"distanta-litera.h"
+#include"distanta-cuvinte.h"
+
 int main() {
     build_dictionaries(); // aceasta linie a fost comentata pentru ca dura putin soratea dictionarului
     build_menu();
