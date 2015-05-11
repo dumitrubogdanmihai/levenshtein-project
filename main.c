@@ -5,14 +5,12 @@
 // au mai fost scoase din headerele nefolosite in main
 #include "list.h"
 #include "menu.h"
-
-#include"tastatura.h"
-#include"distanta-litera.h"
-#include"distanta-cuvinte.h"
+#include"distanta-taste.h"
 
 int main() {
     build_dictionaries(); // aceasta linie a fost comentata pentru ca dura putin soratea dictionarului
     build_menu();
+    citire_tastatura("keyboard.txt");
     print_menu();
     while(1){
         if(GetAsyncKeyState( VK_UP )& 0x8000)

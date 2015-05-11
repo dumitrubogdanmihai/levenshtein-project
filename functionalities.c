@@ -60,13 +60,15 @@ void live_input(){
         if(word[strlen(word)-1]==' ')
             word[strlen(word)-1]='\0';
 //        printf("\n Cuvantul format  este: \"%s\"\n",word);
-        find_similar_words(&sim_words, word, 1, l_dict_lex.head, l_dict_lex.tail);
+        find_similar_words(&sim_words, word, strlen(word)/2+1, l_dict_lex.head, l_dict_lex.tail);
 //        print_list(sim_words.head, sim_words.tail);
-        sort_list_lev(&sim_words, word);
+        sort_list_lev_upgraded(&sim_words, word);
 //printf("\"%s\"\n",)
         if(strcmp(sim_words.head->word,word)==0)
             printf(" - Cuvant Corect!\n");
-        else
+        else{
+            Beep(20,200);
            print_list(sim_words.head, sim_words.tail);
+        }
     }
 }
