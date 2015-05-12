@@ -21,7 +21,7 @@ List load_words(char file_name[], bool eliminate_duplicates ){
 
     if(eliminate_duplicates){ // pentru rapiditatea citirii datelor am scos acest if in afara while-ului
         while(fgets(buffer,255,f)){
-            if( listSearch(&l,buffer)==NULL ){
+            if( list_search(&l,buffer)==NULL ){
                 if(buffer[strlen(buffer)-1]=='\n')
                     buffer[strlen(buffer)-1]='\0';
                 n = (List_Node*) malloc(sizeof(List_Node));
@@ -242,7 +242,7 @@ void sort_list_lex( List *l ){//sorteaza lexicografic lista cu insertion sort
 }
 
 
-List_Node* listSearch(List *l, char *k) {
+List_Node* list_search(List *l, char *k) {
     List_Node *x;
     x = l->head;
     while ( x!=NULL && strcmp(x->word,k)!=0 ) {
@@ -313,11 +313,10 @@ void save_dictionary(List* l, char file_name[]) {
 
 void print_list( List_Node* start, List_Node* stop) {
     if(start == NULL){
-        printf(" Lista este vida!\n");
+        printf(" Vid list!\n");
     }
     else{
         List_Node *n;
-        printf("     Elementele listei sunt : \n");
 
         n = start;
         while (n != stop->next) {

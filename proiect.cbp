@@ -31,14 +31,14 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="distanta-taste.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="distanta-taste.h" />
 		<Unit filename="functionalities.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="functionalities.h" />
+		<Unit filename="keys-distantance.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="keys-distantance.h" />
 		<Unit filename="levenshtein.c">
 			<Option compilerVar="CC" />
 		</Unit>

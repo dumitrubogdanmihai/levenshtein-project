@@ -2,6 +2,7 @@
 #include"menu.h"
 #include<conio.h>
 void menu_up(){
+    Beep(5,50);
     if(highlighted_item > 0)
         highlighted_item --;
     else
@@ -9,6 +10,7 @@ void menu_up(){
     print_menu();
 }
 void menu_down(){
+    Beep(5,50);
     if(highlighted_item < menu[current_menu].nr_items-1)
         highlighted_item ++;
     else
@@ -16,6 +18,7 @@ void menu_down(){
     print_menu();
 }
 void menu_enter(){
+    Beep(5,50);
     system("cls");
     // se ia fiecare caz de meniu si fiecare caz de element de meniu in parte.
 

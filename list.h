@@ -24,7 +24,7 @@ int max_len;
 
 List load_words(char file_name[], bool eliminate_duplicates );
 List load_dictionary(char file_name[], bool eliminate_duplicates );
-List_Node* listSearch(List *l, char *k);
+List_Node* list_search(List *l, char *k);
 void index_lex(List* l, List_Node* index[] );
 void index_len(List* l, List_Node* index[], int* max_len ) ;
 void sort_list_len( List *l, List_Node* start, List_Node* stop );

@@ -27,11 +27,8 @@ void load_keyboard(char fisier[]){
             fscanf(f,"%c",&ch);
         for(j=0;j<nr_coloane;j++){
             fscanf(f,"%c",&ch);
-
-            printf("c=%c\n",ch);
             linie_litera[(int)(tolower(ch))-97]=i;
             coloana_litera[(int)(tolower(ch))-97]=j;
-            printf("%d %d\n",i,j);
         }
     }
     fclose(f);

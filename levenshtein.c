@@ -146,6 +146,8 @@ void sort_list_lev_upgraded( List *l , char* word){//sorteaza lexicografic lista
     register List_Node *i;
     register List_Node *key;
     register List_Node *key_next;
+    if(l->head==NULL)
+        return;
     key = l->head->next;
 
     while( key != NULL){
