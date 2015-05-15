@@ -1,21 +1,21 @@
 # depslib dependency file v1.0
-1431460122 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
+1431689191 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
 	"list.h"
 	<stdio.h>
 	<string.h>
 	<assert.h>
 
-1431382582 c:\users\bogdan\documents\github\levenshtein-project\list.h
+1431689191 c:\users\bogdan\documents\github\levenshtein-project\list.h
 	<stdbool.h>
 
-1431457937 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
+1431689191 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
 	"list.h"
 	<stdio.h>
 	<string.h>
 	<assert.h>
 	<windows.h>
 
-1431411219 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+1431689191 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -28,21 +28,21 @@
 
 1428770663 c:\users\bogdan\documents\github\levenshtein-project\tools.h
 
-1431461053 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
+1431689191 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
 	"list.h"
 	<windows.h>
 	<stdio.h>
 	<string.h>
 
-1431362495 c:\users\bogdan\documents\github\levenshtein-project\menu.h
+1431689191 c:\users\bogdan\documents\github\levenshtein-project\menu.h
 	<string.h>
 
-1431461256 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
+1431689191 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
 	"functionalities.h"
 	"menu.h"
 	<conio.h>
 
-1431362495 c:\users\bogdan\documents\github\levenshtein-project\functionalities.h
+1431689191 c:\users\bogdan\documents\github\levenshtein-project\functionalities.h
 
 1431362731 c:\users\bogdan\documents\github\levenshtein-project\tastatura.h
 
@@ -56,9 +56,9 @@
 
 1431367803 c:\users\bogdan\documents\github\levenshtein-project\distanta-taste.h
 
-1431459708 source:c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.c
+1431689191 source:c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.c
 	<stdio.h>
 	"keys-distantance.h"
 
-1431459585 c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.h
+1431689191 c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.h
 

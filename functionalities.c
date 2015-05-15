@@ -21,8 +21,23 @@ void one_word(){
     scanf("%d",&error);
     printf("\n");
 
-    find_similar_words(&sim_words, word, error, l_dict_lex.head, l_dict_lex.tail);
-    print_list(sim_words.head, sim_words.tail);
+    if(list_search(&l_dict_lex, word)==NULL){
+                Beep(20,200);
+                find_similar_words(&sim_words, word, strlen(word)/2+1, l_dict_lex.head, l_dict_lex.tail);
+                sort_list_lev_upgraded(&sim_words, word);
+                if(sim_words.head==NULL){
+                    Beep(30,200);
+                    printf("The word \"%s\" is incorrect and there are no word like him!\n",word);
+                }
+                else{
+                    Beep(10,200);
+                    printf("The word \"%s\" is not correct!\n Suggestions: \n",word);
+                    print_list(sim_words.head, sim_words.tail);
+                }
+            }
+            else{
+                    printf("The word \"%s\" is correct!\n",word);
+            }
 
     printf("\n\tPress any key to come back to the main menu!");
     getch();
@@ -44,19 +59,24 @@ void from_file(){
     while(fgets(buff,255,f)){
         p=strlwr(strtok(buff,separator));
         while(p!=NULL){
-            find_similar_words(&sim_words, p, strlen(p)/2+1, l_dict_lex.head, l_dict_lex.tail);
-            sort_list_lev_upgraded(&sim_words, p);
-            if(sim_words.head==NULL)
-                printf("The word \"%s\" is incorrect and there are no word like him!\n",p);
-            else{
-                if(strcmp(sim_words.head->word, p)!=0){
-                    Beep(20,200);
+            if(list_search(&l_dict_lex, p)==NULL){
+                Beep(20,200);
+                find_similar_words(&sim_words, p, strlen(p)/2+1, l_dict_lex.head, l_dict_lex.tail);
+                sort_list_lev_upgraded(&sim_words, p);
+                if(sim_words.head==NULL){
+                    Beep(30,200);
+                    printf("The word \"%s\" is incorrect and there are no word like him!\n",p);
+                }
+                else{
+                    Beep(10,200);
                     printf("The word \"%s\" is not correct!\n Suggestions: \n",p);
                     print_list(sim_words.head, sim_words.tail);
                 }
-                else
+            }
+            else{
                     printf("The word \"%s\" is correct!\n",p);
             }
+
             p=strlwr(strtok(NULL,separator));
         }
     }
@@ -96,15 +116,24 @@ void live_input(){
         }
         if(word[0]!='\0'){
             if(word[strlen(word)-1]==' ')
-                word[strlen(word)-1]='\0';\
-            find_similar_words(&sim_words, word, strlen(word)/2+2, l_dict_lex.head, l_dict_lex.tail);\
-            sort_list_lev_upgraded(&sim_words, word);\
-            if(strcmp(sim_words.head->word,word)==0)
-                printf(" - Correct word!\n");
-            else{
+                word[strlen(word)-1]='\0';
+
+                 if(list_search(&l_dict_lex, word)==NULL){
                 Beep(20,200);
-                printf(" - Incorrect!\n Suggestions:\n");
-                print_list(sim_words.head, sim_words.tail);
+                find_similar_words(&sim_words, word, strlen(word)/2+1, l_dict_lex.head, l_dict_lex.tail);
+                sort_list_lev_upgraded(&sim_words, word);
+                if(sim_words.head==NULL){
+                    Beep(30,200);
+                    printf("The word \"%s\" is incorrect and there are no word like him!\n",word);
+                }
+                else{
+                    Beep(10,200);
+                    printf("The word \"%s\" is not correct!\n Suggestions: \n",word);
+                    print_list(sim_words.head, sim_words.tail);
+                }
+            }
+            else{
+                    printf("The word \"%s\" is correct!\n",word);
             }
         }
         Sleep(50);
