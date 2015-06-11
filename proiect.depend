@@ -1,0 +1,77 @@
+# depslib dependency file v1.0
+1434065343 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
+	"list.h"
+	<stdio.h>
+	<string.h>
+	<assert.h>
+
+1434065343 c:\users\bogdan\documents\github\levenshtein-project\list.h
+	<stdbool.h>
+
+1434065343 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
+	"list.h"
+	<stdio.h>
+	<string.h>
+	<assert.h>
+	<windows.h>
+
+1434065343 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	<windows.h>
+	"list.h"
+	"menu.h"
+	"keys-distantance.h"
+
+1431692871 c:\users\bogdan\documents\github\levenshtein-project\levenshtein.h
+	"list.h"
+
+1428770663 c:\users\bogdan\documents\github\levenshtein-project\tools.h
+
+1434065343 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
+	"list.h"
+	<windows.h>
+	<stdio.h>
+	<string.h>
+
+1434065343 c:\users\bogdan\documents\github\levenshtein-project\menu.h
+	<string.h>
+
+1434065343 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
+	"functionalities.h"
+	"menu.h"
+	<conio.h>
+	<windows.h>
+
+1434065343 c:\users\bogdan\documents\github\levenshtein-project\functionalities.h
+
+1431362731 c:\users\bogdan\documents\github\levenshtein-project\tastatura.h
+
+1431362731 c:\users\bogdan\documents\github\levenshtein-project\distanta-litera.h
+
+1431362731 c:\users\bogdan\documents\github\levenshtein-project\distanta-cuvinte.h
+
+1431368071 source:c:\users\bogdan\documents\github\levenshtein-project\distanta-taste.c
+	<stdio.h>
+	"distanta-taste.h"
+
+1431367803 c:\users\bogdan\documents\github\levenshtein-project\distanta-taste.h
+
+1434065343 source:c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.c
+	<stdio.h>
+	"keys-distantance.h"
+
+1434065343 c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.h
+
+1431693242 c:\users\bogdan\documents\github\levenshtein-project\menu-list.h
+	<string.h>
+	"list.h"
+
+1431693267 source:c:\users\bogdan\documents\github\levenshtein-project\menu-list.c
+	"functionalities.h"
+	"menu-list.h"
+	"levenshtein.h"
+	"list.h"
+	<conio.h>
+
