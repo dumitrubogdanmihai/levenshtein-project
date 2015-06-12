@@ -94,10 +94,18 @@ void flush(){
 }
 void ClearSelectAreea(){
     int i;
-    for(i=0;i<9;i++){
+    for(i=0;i<8;i++){
         GotoXY(0,i);
-        printf("                                           ");
+        printf("                                                                         ");
     }
+}
+void ClearAfterPoint(POINT p){
+    int i;
+    GotoXY(p.x,p.y);
+    for(i=0;i<9;i++){
+        printf("      ");
+    }
+    GotoXY(p.x,p.y);
 }
 void Print_sel(char * word, List * l, List_Node * high_item){//print selection area
     List_Node* i;
@@ -152,31 +160,39 @@ void Select_correct_word(char * word, List * sugestions){
 
         if(GetAsyncKeyState( VK_RETURN)& 0x8000){
             strcpy(word, high_item->word);
-            ClearSelectAreea();flush();
+            ClearSelectAreea();
+            GotoXY(3,3);
+            printf("The word \"%s\" was replaced by the word \"%s\"!",word,high_item->word);flush();
             return;
         }
-        Sleep(50); //kill the extra sensibility
+        Sleep(100); //kill the extra sensibility
     }flush();
 }
 
 void live_input(){
 
-    FILE * f = fopen("live_input.txt","w");
+    FILE * f_corected = fopen("live_input f_corected.txt","w");
+    FILE * f_inserted = fopen("live_input f_inserted.txt","w");
     char ch[2],word[50];
     ch[1]='\0';
     List sim_words ;
     POINT curs;// cursor position
+
+    ClearSelectAreea();
+    GotoXY(3,3);
+    printf(" Here you will see all the informations you need about your text");
+
+    GotoXY(3,9);
+    printf("Your text:");
 
     // complex flush
     fflush(stdin);
     while ((ch[0] = getchar()) != '\n' && ch[0] != EOF)
         continue;
 
-    Sleep(150);
-
-
-    GotoXY(0,10);// typing
+    GotoXY(3,10);// typing
     while(1){
+
         word[0]='\0';
         ch[0]='\0';
         save_curs(&curs);
@@ -197,11 +213,13 @@ void live_input(){
         }
 
 
+
         // if an word was typed
         if(word[0]!='\0'){
             if(word[strlen(word)-1]==' ')
                 word[strlen(word)-1]='\0';
 
+            fprintf(f_inserted,"%s ",word);
             // if the word is incorrect
             if(list_search(&l_dict_lex, word)==NULL){
 
@@ -211,26 +229,34 @@ void live_input(){
                 sort_list_lev_upgraded(&sim_words, word);
 
                 if(sim_words.head==NULL){
-                    Beep(30,200);
-                   // printf("The word \"%s\" is incorrect and there are no word like him!\n",word);
+                    ClearSelectAreea();
+                    Beep(90,200);
+                    GotoXY(3,3);
+                    printf("The word \"%s\" is incorrect and there are no word like him!\n",word);
                 }
                 else{
-                    Beep(10,200);
-
+                    Beep(70,200);
                     Select_correct_word(word, &sim_words);
                 }
             }
-        }
-    Sleep(50);
-    GotoXY(curs.x, curs.y);
-    printf("%s ",word);
-    //Sleep(550);
-    fprintf(f,"%s ",word);
-    //Sleep(550);
+            else{
+                ClearSelectAreea();
+                GotoXY(3,3);
+                printf("The word \"%s\" is correct!\n",word);
 
+            }
+        }
+
+        ClearAfterPoint(curs);
 
         // back to the saved cursor
+        GotoXY(curs.x, curs.y);
+
         // update the word to the cmd and go on
+        printf("%s ",word);
+
+        fprintf(f_corected,"%s ",word);
+
         Sleep(50);
     }
 }
