@@ -7,14 +7,14 @@ int min(int a,int b){
     return b;
 }
 
-int distanta_litera(char a, char b){
+int dist_lit(char a, char b){
     return (  abs(linie_litera[a-97]-linie_litera[b-97]) +  abs(coloana_litera[a-97]-coloana_litera[b-97])  );
 }
 
 int distanta_cuvinte(char * c1, char *c2){
     int i,j,s=0;
     for(i=0;i< min(strlen(c1),strlen(c2)) ; i++)
-        s+= distanta_litera( c1+i, c2+i );
+        s+= dist_lit( c1+i, c2+i );
     return s;
 }
 
