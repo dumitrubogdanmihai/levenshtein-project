@@ -225,7 +225,7 @@ void live_input(){
 
                 Beep(20,200);
 
-                find_similar_words(&sim_words, word, 3*strlen(word), l_dict_lex.head, l_dict_lex.tail);
+                find_similar_words(&sim_words, word, strlen(word)/2+1, l_dict_lex.head, l_dict_lex.tail);
                 sort_list_lev_upgraded(&sim_words, word);
 
                 if(sim_words.head==NULL){
