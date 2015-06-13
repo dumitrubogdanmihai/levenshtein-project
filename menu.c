@@ -14,7 +14,7 @@ int wherex(){
             return -1;
         return csbi.dwCursorPosition.X;
     }
-    int wherey(){
+int wherey(){
         CONSOLE_SCREEN_BUFFER_INFO csbi;
         if (!GetConsoleScreenBufferInfo(GetStdHandle( STD_OUTPUT_HANDLE ),&csbi))
             return -1;

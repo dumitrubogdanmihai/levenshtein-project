@@ -15,13 +15,16 @@ void one_word(){
 
     system("cls");
     printf("\n\t\tOne word function: \n\n");
-    printf(" Enter the word: ");
-    scanf("%s",word);
-    printf(" Enter the maximum error accepted: ");
-    scanf("%d",&error);
-    printf("\n");
 
-    if(list_search(&l_dict_lex, word)==NULL){
+   while( 1 ){        //repeat while ESC isn't pressed
+
+        printf("\n\n Enter the word: ");
+        scanf("%s",word);
+        printf(" Enter the maximum error accepted: ");
+        scanf("%d",&error);
+        printf("\n");
+
+        if(list_search(&l_dict_lex, word)==NULL){
                 Beep(20,200);
                 find_similar_words(&sim_words, word, strlen(word)/2+1, l_dict_lex.head, l_dict_lex.tail);
                 sort_list_lev_upgraded(&sim_words, word);
@@ -34,14 +37,19 @@ void one_word(){
                     printf("The word \"%s\" is not correct!\n Suggestions: \n",word);
                     print_list(sim_words.head, sim_words.tail);
                 }
-            }
-            else{
-                    printf("The word \"%s\" is correct!\n",word);
-            }
+        }
+        else{
+            printf("The word \"%s\" is correct!\n",word);
+        }
 
-    printf("\n\tPress any key to come back to the main menu!");
-    getch();
+        printf("\n\t  Press any key to try again or press ESC to come back to the main menu!  ");
+        getch();
+        if( GetAsyncKeyState( VK_ESCAPE )& 0x8000 ){
+            break;
+        }
+    }
 }
+
 void from_file(){
     system("cls");
     printf("\n\t\tFrom file function \n");
