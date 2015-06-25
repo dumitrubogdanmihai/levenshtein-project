@@ -1,11 +1,13 @@
 #include<stdio.h>
+#include<string.h>
+#include<math.h>
 #include"keys-distantance.h"
 
 void getNeighbors(char ch, char * neigh){
     int i,j;
-    for( i = keyboard[linie_litera[ch]-1]; i<=keyboard[linie_litera[ch]+1] && i<=4 ; i++  ){
+    for( i = (int) keyboard[linie_litera[(int)ch]-1]; i<=(int)keyboard[linie_litera[(int)ch]+1] && i<=4 ; i++  ){
         if(i<0)i=0;
-        for(  j = keyboard[coloana_litera[ch]-1]; j<=keyboard[coloana_litera[ch]+1] && j<=4 ; j++  ){
+        for(  j = (int)keyboard[coloana_litera[(int)ch]-1]; j<=(int)keyboard[coloana_litera[(int)ch]+1] && j<=4 ; j++  ){
             if(j<0)j=0;
             strcpy(neigh,keyboard[i][j]);
         }
@@ -21,18 +23,11 @@ int min(int a,int b){
 int dist_lit(char a, char b){
     if(a==b)
         return 0;
-    int dist_x = abs(linie_litera[a]-linie_litera[b]),
-        dist_y = abs(coloana_litera[a]-coloana_litera[b]);
+    int dist_x = abs((int)linie_litera[(int)a]-linie_litera[(int)b]),
+        dist_y = abs(coloana_litera[(int)a]-coloana_litera[(int)b]);
     if( dist_x == dist_y && dist_x == 1)
         return 1;
     return 1 + ( dist_x + dist_y  );
-}
-
-int distanta_cuvinte(char * c1, char *c2){
-    int i,j,s=0;
-    for(i=0;i< min(strlen(c1),strlen(c2)) ; i++)
-        s+= dist_lit( c1+i, c2+i );
-    return s;
 }
 
 void load_keyboard(char fisier[]){

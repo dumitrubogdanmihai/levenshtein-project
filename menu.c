@@ -1,7 +1,6 @@
-#include"main-menu.h"
-#include"levenshtein.h"
 #include"menu.h"
-#include"options-menu.h"
+#include"levenshtein.h"
+#include<stdio.h>
 #include<conio.h>
 #include<windows.h>
 
@@ -29,23 +28,22 @@ void save_curs(POINT * p){
 }
 
 void menu_up(){
-    Beep(5,50);
     if(highlighted_item > 0)
         highlighted_item --;
     else
         highlighted_item =menu[current_menu].nr_items-1;
     print_menu();
+    Sleep(50);
 }
 void menu_down(){
-    Beep(5,50);
     if(highlighted_item < menu[current_menu].nr_items-1)
         highlighted_item ++;
     else
         highlighted_item = 0;
     print_menu();
+    Sleep(50);
 }
 void menu_enter(){
-    Beep(5,50);
     system("cls");
     // se ia fiecare caz de meniu si fiecare caz de element de meniu in parte.
 
@@ -141,6 +139,7 @@ void menu_enter(){
         }
     }
     print_menu();
+    Sleep(50);
 }
 void print_menu(){
     int i,j;
@@ -164,7 +163,7 @@ void build_menu(){
     strcpy( menu[0].item[0] , "One word" );
     strcpy( menu[0].item[1] , "From file" );
     strcpy( menu[0].item[2] , "Live input" );
-    strcpy( menu[0].item[3] , "options-menu" );
+    strcpy( menu[0].item[3] , "Options menu" );
     strcpy( menu[0].item[4] , "Quit" );
 
     menu[1].nr_items = 8;

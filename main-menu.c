@@ -1,6 +1,8 @@
 #include"list.h"
+#include"levenshtein.h"
 #include<windows.h>
 #include<stdio.h>
+#include<conio.h>
 #include<string.h>
 
 
@@ -29,7 +31,6 @@ void one_word(){
         if(list_search(&dict_lex, word)==NULL){
                 Beep(20,200);
                 find_sim_words(&sim_words, word, strlen(word)/2+1, dict_lex.head, dict_lex.tail);
-                sort_list_lev(&sim_words, word);
                 if(sim_words.head==NULL){
                     Beep(30,200);
                     printf("The word \"%s\" is incorrect and there are no word like him!\n",word);

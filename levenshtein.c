@@ -1,7 +1,9 @@
 #include "list.h"
 #include "levenshtein.h"
+#include "keys-distantance.h"
 #include<stdio.h>
 #include<string.h>
+#include<stdlib.h>
 #include <assert.h>
 
 int min_val(int a, int b, int c);

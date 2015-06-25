@@ -31,10 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="functionalities.c">
+		<Unit filename="dictionary.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="functionalities.h" />
+		<Unit filename="dictionary.h" />
 		<Unit filename="keyboard.txt" />
 		<Unit filename="keys-distantance.c">
 			<Option compilerVar="CC" />
@@ -48,6 +48,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="list.h" />
+		<Unit filename="main-menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="main-menu.h" />
 		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -55,12 +59,10 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="menu.h" />
-		<Unit filename="options.c">
+		<Unit filename="options-menu.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="options.h">
-			<Option target="&lt;{~None~}&gt;" />
-		</Unit>
+		<Unit filename="options-menu.h" />
 		<Extensions>
 			<code_completion />
 			<envvars />

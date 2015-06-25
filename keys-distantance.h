@@ -7,7 +7,6 @@ char keyboard[6][15];
 
 void getNeighbors(char ch, char * neigh);
 int dist_lit(char a, char b);
-int distanta_cuvinte(char * c1, char *c2);
 void load_keyboard(char fisier[]);
 
 #endif // KEYS-DISTANCE_H_INCLUDED
