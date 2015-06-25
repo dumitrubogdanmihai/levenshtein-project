@@ -35,6 +35,7 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="functionalities.h" />
+		<Unit filename="keyboard.txt" />
 		<Unit filename="keys-distantance.c">
 			<Option compilerVar="CC" />
 		</Unit>

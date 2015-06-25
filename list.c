@@ -1,15 +1,35 @@
 #include "list.h"
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include <assert.h>
 #include <windows.h>
 
-void build_dictionaries(){ // pe viitor functia aceasta ar fi bine sa o mutam in list.c
-    l_dict_lex = load_words("dictionary/wordsEnLex.txt",false);
+void free_dict(List * dict){
+    List_Node *i=dict->head;
+    List_Node *next;
+
+    while (i != NULL) {
+        next = i->next;
+
+        free(i->word);
+        free(i);
+
+        i = next;
+    }
+
+    dict->head = NULL;
+    dict->tail = NULL;
+}
+
+
+
+void load_dictionaries(){
+    l_dict_lex = load_dictionary("dictionary/wordsEnLex.txt",false);
     index_lex(&l_dict_lex, ind_lex);
 
-    l_dict_len = load_words("dictionary/wordsEnLen.txt",false);
-    index_len(&l_dict_len, ind_len, &max_len);
+    l_dict_len = load_dictionary("dictionary/wordsEnLen.txt",false);
+    index_len(&l_dict_len, ind_len, &max_len);List_Node *i;
 }
 
 List load_words(char file_name[], bool eliminate_duplicates ){
@@ -58,51 +78,19 @@ List load_dictionary(char file_name[], bool eliminate_duplicates ){ // doar pt l
     while(fgets(buffer,255,f)){
         if(buffer[ strlen(buffer)-1] == '\n')
            buffer[strlen(buffer)-1] = '\0';
-//        puts("______________________________________________________");
-//        puts("______________________________________________________");
-//        printf("\tbuffer : \"%s\"\n",buffer);
 
         n = (List_Node*) malloc( sizeof(List_Node) );
 
         p=strtok(buffer," \t\n");
-if(p!=NULL){
-//        printf("p-word:   \"%s\"   len:%d\n", p,strlen(p));
-        n->word = (char *) malloc( sizeof(char)*strlen(p)+1 );
-        strcpy( n->word, p);
-//        printf("n->word=\"%s\"   len:%d\n\n",n->word,strlen(n->word));
-}
-
-        p=strtok(NULL," \t\n");
-if(p!=NULL){
-//        printf("p-type:   \"%s\"   len:%d\n", p,strlen(p));
-        n->type = (char *)  malloc( sizeof(char)*strlen(p)+1 );
-        strcpy(n->type, p);
-//        printf("n->type= \"%s\"   len:%d\n\n",n->type, strlen(n->type));
-}
-
-        p=strtok(NULL," \t\n");
-if(p!=NULL){
-        int aux=atoi(p);
-//        printf("p-type:   \"%s\"   len:%d\n", p, strlen(p));
-//        printf("atoi(p):   \"%d\" \n", aux);
-        n->code = aux;
-//        printf("n->code= \"%d\"\n\n",n->code);
-}
-
-        p=strtok(NULL," \t\n");
-
-if(p!=NULL){
-//        printf("p-type:   \"%s\"   len:%d\n", p, strlen(p));
-            n->restr = (char *) malloc(sizeof(char)*strlen(p)+1 );
-            strcpy(n->restr, p);
-//            printf("n->restr= \"%s\"   len:%d\n",n->restr,strlen(n->restr));
-        }
-        else{
-            n->restr = NULL;
+        if(p!=NULL){
+            n->word = (char *) malloc( sizeof(char)*strlen(p)+1 );
+            strcpy( n->word, p);
         }
 
-//        printf("\n");
-
+        p=strtok(NULL," \t\n");
+        if(p!=NULL){
+            n->app = atoi(p);
+        }
         list_insert(&l,n);
     }
     fclose(f);
@@ -126,6 +114,7 @@ void index_lex(List* l, List_Node* index[] ) {
         i = i->next;
     }
 }
+
 void index_len(List* l, List_Node* index[], int* max_len ) {
     int len;
     int k;
@@ -147,12 +136,11 @@ void index_len(List* l, List_Node* index[], int* max_len ) {
     }
 }
 
-// sorteaza !!!TOATA!!! lista, indiferent de ce parametrii primeste prin start si stop
-void sort_list_len( List *l, List_Node* start, List_Node* stop ){//sorteaza dupa lungimea cuvintelor lista cu insertion sort
+void sort_list_len( List *l ){//sorteaza dupa lungimea cuvintelor lista cu insertion sort
     register List_Node *i;
     register List_Node *key;
     register List_Node *key_next;
-    key = start->next;
+    key = l->head;
 
 //    while( (key != NULL) && (key!= (stop->next)) ){
     while( key != NULL ){
@@ -241,7 +229,6 @@ void sort_list_lex( List *l ){//sorteaza lexicografic lista cu insertion sort
     }
 }
 
-
 List_Node* list_search(List *l, char *k) {
     List_Node *x;
     x = l->head;
@@ -250,6 +237,7 @@ List_Node* list_search(List *l, char *k) {
     }
     return x;
 }
+
 void list_insert(List *l, List_Node *x) {
     if(l->head==NULL){
         l->head = x;
@@ -279,6 +267,7 @@ void list_remove(List *l, List_Node *x) {
     else {
         l->tail = x->prev;
     }
+    free(x->word);
     free(x);
 }
 
@@ -298,17 +287,25 @@ void save_list(List* l, char file_name[]) {
 }
 void save_dictionary(List* l, char file_name[]) {
     List_Node *i=l->head;
-
     char file_path[100]="\dictionary\\";
     strcat(file_path,file_name);
-    FILE* f=fopen(file_path, "w");
+    FILE* f=fopen(file_name, "w");
     assert(f!=NULL);
 
     while (i != NULL) {
-        fprintf(f,"%s\t %s\t %d\t %s\n", i->word, i->type, i->code, i->restr );
+        fprintf(f,"%s\t\t %d\n", i->word, i->app);
         i = i->next;
     }
     fclose(f);
+}
+
+void print_dictionary(List* l) {
+    List_Node *i=l->head;
+
+    while (i != NULL) {
+        fprintf(stdout,"%s\t\t %d\n", i->word, i->app);
+        i = i->next;
+    }
 }
 
 void print_list( List_Node* start, List_Node* stop) {
@@ -319,41 +316,10 @@ void print_list( List_Node* start, List_Node* stop) {
         List_Node *n;
 
         n = start;
-        while (n != stop->next) {
-            printf("      %s\n",n->word);
+        while (n!=NULL && n != stop->next ) {
+            printf("      %s \n",n->word);
             n = n->next;
         }
 
     }
 }
-//void print_list(List* l) {
-//    if(start == NULL){
-//        printf(" Lista este vida!\n");
-//    }
-//    else{
-//        List_Node *n;
-//        printf(" Elementele listei sunt : \n");
-//
-//        n = start;
-//        while (n != stop->next) {
-//            printf("  %s\n",n->word);
-//            n = n->next;
-//        }
-//    }
-//}
-//void print_dictionary( List_Node* start, List_Node* stop) {
-//    if(start == NULL){
-//        printf(" Lista este vida!\n");
-//    }
-//    else{
-//        List_Node *n;
-//        printf(" Elementele listei sunt : \n");
-//
-//        n = start;
-//
-//        while (n != stop->next) {
-//            printf(" %s\t %s\t %d\t %s\n",n->word, n->type, n->code, n->restr );
-//            n = n->next;
-//        }
-//    }
-//}

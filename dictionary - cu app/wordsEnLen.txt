@@ -95826,7 +95826,6 @@ zestfulness		 0
 zooplankton		 0
 zoroastrian		 0
 zymoplastic		 0
- abcdefghtv		 0
 abandonments		 0
 abbreviating		 0
 abbreviation		 0
@@ -101639,7 +101638,6 @@ zoologically		 0
 zooparasitic		 0
 zoopathology		 0
 zoroastrians		 0
-hakunamatata		 0
 abbreviations		 0
 abnormalities		 0
 abolitionists		 0

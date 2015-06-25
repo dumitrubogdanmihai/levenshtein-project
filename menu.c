@@ -1,7 +1,9 @@
 #include"functionalities.h"
 #include"menu.h"
+#include"options.h"
 #include<conio.h>
 #include<windows.h>
+
 void GotoXY( int x, int y){ // move the cursor to the line y and column x
    COORD coord;
    coord.X = x;
@@ -63,7 +65,8 @@ void menu_enter(){
                     break;
                 }
                 case 3 : {//Options
-                    printf("\n\tOptions");// dupa ce se va contrui meniul de optiuni se va afisa acesta pe ecran
+                    current_menu = 1;
+                    highlighted_item = 0;
                     break;
                 }
                 case 4 : {//Exit
@@ -78,6 +81,37 @@ void menu_enter(){
 
         //options
         case 1 : {
+            switch (highlighted_item){
+                case 0 : {//Update words apparitions
+                    update_app_words();
+                    break;
+                }
+                case 1 : {//Insert an word to dictonary
+                    insert_word();
+                    break;
+                }
+                case 2 : {//Delete an word from dictonary
+                    delete_word();
+                    break;
+                }
+                case 3 : {//Reset dictionary
+                    reset_dict();
+                    break;
+                }
+                case 4 : {//Build dictonary from file
+                    build_dict();
+                    break;
+                }
+                case 5 : {//Add words to dictonary from file
+                    update_words();
+                    break;
+                }
+                case 6 : {//back
+                    current_menu = 0;
+                    highlighted_item = 0;
+                    break;
+                }
+            }
             break;
         }
     }
@@ -88,14 +122,12 @@ void print_menu(){
     system("cls");
 //    system("clear"); unix
     printf("\n\n\n\t");
-    for(i=0; i<menu[current_menu].nr_items; i++, printf("\n\t"))
+    for(i=0; i<menu[current_menu].nr_items; i++, printf("\n\t")){
+        if(highlighted_item == i)
+                printf(" > ");
         for(j=0; j<strlen(menu[current_menu].item[i]); j++)
-            if(highlighted_item == i)
-                printf(" %c", menu[current_menu].item[i][j]);
-            else
                 printf("%c", menu[current_menu].item[i][j]);
-            // daca elementul din meniu pe care doresc sa-l afisez este egal cu elementul subliniat atunci se evidentiaza cu cate un spatiu intre literele sale
-            // pe viitor am putea sa-l evidentiem colorandu-l intr-o culoare aparte
+    }
 }
 void build_menu(){
     // se atribuie variabilelor aferente meniului valorile si stringurile corespunzatoare
@@ -109,4 +141,13 @@ void build_menu(){
     strcpy( menu[0].item[2] , "Live input" );
     strcpy( menu[0].item[3] , "Options" );
     strcpy( menu[0].item[4] , "Quit" );
+
+    menu[1].nr_items = 7;
+    strcpy( menu[1].item[0] , "Update words apparitions" );
+    strcpy( menu[1].item[1] , "Insert an word to dictonary" );
+    strcpy( menu[1].item[2] , "Delete an word from dictonary" );
+    strcpy( menu[1].item[3] , "Reset dictionary" );
+    strcpy( menu[1].item[4] , "Build dictonary from file" );
+    strcpy( menu[1].item[5] , "Add words to dictonary from file" );
+    strcpy( menu[1].item[6] , "Back" );
 }

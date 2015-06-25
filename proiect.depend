@@ -1,21 +1,22 @@
 # depslib dependency file v1.0
-1434111674 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
+1435176176 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
 	"list.h"
 	<stdio.h>
 	<string.h>
 	<assert.h>
 
-1434065343 c:\users\bogdan\documents\github\levenshtein-project\list.h
+1435177442 c:\users\bogdan\documents\github\levenshtein-project\list.h
 	<stdbool.h>
 
-1434065343 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
+1435223746 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
 	"list.h"
 	<stdio.h>
+	<stdlib.h>
 	<string.h>
 	<assert.h>
 	<windows.h>
 
-1434110962 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+1435155738 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -29,18 +30,19 @@
 
 1428770663 c:\users\bogdan\documents\github\levenshtein-project\tools.h
 
-1434111179 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
+1435221797 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
 	"list.h"
 	<windows.h>
 	<stdio.h>
 	<string.h>
 
-1434065343 c:\users\bogdan\documents\github\levenshtein-project\menu.h
+1435183160 c:\users\bogdan\documents\github\levenshtein-project\menu.h
 	<string.h>
 
-1434065343 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
+1435223897 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
 	"functionalities.h"
 	"menu.h"
+	"options.h"
 	<conio.h>
 	<windows.h>
 
@@ -58,11 +60,11 @@
 
 1431367803 c:\users\bogdan\documents\github\levenshtein-project\distanta-taste.h
 
-1434110431 source:c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.c
+1435151952 source:c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.c
 	<stdio.h>
 	"keys-distantance.h"
 
-1434110431 c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.h
+1435151875 c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.h
 
 1431693242 c:\users\bogdan\documents\github\levenshtein-project\menu-list.h
 	<string.h>
@@ -122,4 +124,64 @@
 	<windows.h>
 
 1434175241 d:\github\levenshtein-project\functionalities.h
+
+1435221950 c:\users\bogdan\documents\github\levenshtein-project\options.h
+
+1435224376 source:c:\users\bogdan\documents\github\levenshtein-project\options.c
+	"list.h"
+	<windows.h>
+	<stdio.h>
+	<string.h>
+
+1435225397 source:c:\users\enache\desktop\levenshtein-project\functionalities.c
+	"list.h"
+	<windows.h>
+	<stdio.h>
+	<string.h>
+
+1435181042 c:\users\enache\desktop\levenshtein-project\list.h
+	<stdbool.h>
+
+1435155552 source:c:\users\enache\desktop\levenshtein-project\keys-distantance.c
+	<stdio.h>
+	"keys-distantance.h"
+
+1435155475 c:\users\enache\desktop\levenshtein-project\keys-distantance.h
+
+1435179776 source:c:\users\enache\desktop\levenshtein-project\levenshtein.c
+	"list.h"
+	<stdio.h>
+	<string.h>
+	<assert.h>
+
+1435227346 source:c:\users\enache\desktop\levenshtein-project\list.c
+	"list.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<assert.h>
+	<windows.h>
+
+1435228209 source:c:\users\enache\desktop\levenshtein-project\main.c
+	<stdio.h>
+	<stdlib.h>
+	<assert.h>
+	<windows.h>
+	"list.h"
+	"menu.h"
+	"keys-distantance.h"
+
+1435186760 c:\users\enache\desktop\levenshtein-project\menu.h
+	<string.h>
+
+1435227497 source:c:\users\enache\desktop\levenshtein-project\menu.c
+	"functionalities.h"
+	"menu.h"
+	"options.h"
+	<conio.h>
+	<windows.h>
+
+1434068943 c:\users\enache\desktop\levenshtein-project\functionalities.h
+
+1435225550 c:\users\enache\desktop\levenshtein-project\options.h
 

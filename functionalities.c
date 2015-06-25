@@ -2,6 +2,8 @@
 #include<windows.h>
 #include<stdio.h>
 #include<string.h>
+
+
 void one_word(){
     char word[50]; // cuvantul care va fi verificat
     int error;      // eroarea maxima a cuvatului / diferenta maxima suportata dintre cuvinte
@@ -27,7 +29,7 @@ void one_word(){
         if(list_search(&l_dict_lex, word)==NULL){
                 Beep(20,200);
                 find_similar_words(&sim_words, word, strlen(word)/2+1, l_dict_lex.head, l_dict_lex.tail);
-                sort_list_lev_upgraded(&sim_words, word);
+                sort_list_lev(&sim_words, word);
                 if(sim_words.head==NULL){
                     Beep(30,200);
                     printf("The word \"%s\" is incorrect and there are no word like him!\n",word);
@@ -70,7 +72,7 @@ void from_file(){
             if(list_search(&l_dict_lex, p)==NULL){
                 Beep(20,200);
                 find_similar_words(&sim_words, p, strlen(p)/2+1, l_dict_lex.head, l_dict_lex.tail);
-                sort_list_lev_upgraded(&sim_words, p);
+                sort_list_lev(&sim_words, p);
                 if(sim_words.head==NULL){
                     Beep(30,200);
                     printf("The word \"%s\" is incorrect and there are no word like him!\n",p);
@@ -92,7 +94,6 @@ void from_file(){
     getch();
 }
 
-
 // functii necesare pentru live-input
 void flush(){
     char ch;
@@ -111,7 +112,7 @@ void ClearAfterPoint(POINT p){
     int i;
     GotoXY(p.x,p.y);
     for(i=0;i<9;i++){
-        printf("      ");
+        printf("                                           ");
     }
     GotoXY(p.x,p.y);
 }
@@ -122,7 +123,7 @@ void Print_sel(char * word, List * l, List_Node * high_item){//print selection a
 
     ClearSelectAreea();
     GotoXY(0,0);
-    printf("\t\Sugestii pentru %s",word);
+    printf("\t\Sugestii pentru \"%s\":",word);
     GotoXY(0,2);
 
     if(high_item->prev != NULL){
@@ -184,7 +185,7 @@ void live_input(){
     char ch[2],word[50];
     ch[1]='\0';
     List sim_words ;
-    POINT curs;// cursor position
+    POINT curs, cursBack;// cursor position
 
     ClearSelectAreea();
     GotoXY(3,3);
@@ -214,13 +215,26 @@ void live_input(){
                     printf("%c",ch[0]);
                 }
             }
-            if(GetAsyncKeyState( VK_ESCAPE )& 0x8000)
+
+            if(GetAsyncKeyState( VK_BACK )& 0x8000){
+                if( strlen(word) != 0){
+                    save_curs(&cursBack);
+                    GotoXY( cursBack.x-1, cursBack.y);
+                    printf(" ");
+                    word[strlen(word)-1]='\0';
+                    GotoXY(curs.x,curs.y);
+                    printf("%s",word);
+                    GotoXY(cursBack.x-1, cursBack.y);
+                    Sleep(100);
+                }
+            }
+            if(GetAsyncKeyState( VK_ESCAPE )& 0x8000){
                 return;
-            if(GetAsyncKeyState( VK_RETURN )& 0x8000)
-                break;
+                fclose(f_inserted);
+                fclose(f_corected);
+            }
+            if(GetAsyncKeyState( VK_RETURN )& 0x8000) break;
         }
-
-
 
         // if an word was typed
         if(word[0]!='\0'){
@@ -233,8 +247,7 @@ void live_input(){
 
                 Beep(20,200);
 
-                find_similar_words(&sim_words, word, 3*strlen(word), l_dict_lex.head, l_dict_lex.tail);
-                sort_list_lev_upgraded(&sim_words, word);
+                find_similar_words(&sim_words, word, strlen(word)/2, l_dict_lex.head, l_dict_lex.tail);
 
                 if(sim_words.head==NULL){
                     ClearSelectAreea();
@@ -244,6 +257,10 @@ void live_input(){
                 }
                 else{
                     Beep(70,200);
+                    List_Node * newTail = malloc(sizeof(List_Node));
+                    newTail->word = malloc(sizeof(char)*strlen(word)+1);
+                    strcpy(newTail->word,word);
+                    list_insert(&sim_words,newTail);
                     Select_correct_word(word, &sim_words);
                 }
             }
@@ -251,7 +268,6 @@ void live_input(){
                 ClearSelectAreea();
                 GotoXY(3,3);
                 printf("The word \"%s\" is correct!\n",word);
-
             }
         }
 
@@ -267,4 +283,5 @@ void live_input(){
 
         Sleep(50);
     }
+
 }

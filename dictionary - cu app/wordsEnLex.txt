@@ -1,4 +1,3 @@
- abcdefghtv		 0
 a		 9303
 aah		 1
 aahed		 0
@@ -42843,7 +42842,6 @@ hajjis		 0
 hake		 0
 hakeems		 0
 hakes		 0
-hakunamatata		 0
 halavah		 0
 halavahs		 0
 halberd		 0
