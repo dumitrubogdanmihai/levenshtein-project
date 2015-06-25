@@ -130,7 +130,6 @@ int leven2( char *a, unsigned int lena, char *b, unsigned int lenb ){// iterativ
 }
 
 int difference(char **a, unsigned int lena, char **b, unsigned int lenb){
-    printf("%d\n\n",sugg_funct);
     if(sugg_funct==0)
         return leven(a, lena, b, lenb);
     else
@@ -138,7 +137,6 @@ int difference(char **a, unsigned int lena, char **b, unsigned int lenb){
 }
 
 void find_sim_words( List* l_sim, char * word , int changes, List_Node *start, List_Node *stop ){
-    printf("%d\n\n\n\n",find_sim_words);
     l_sim->head = NULL;
     l_sim->tail = NULL;
     List_Node *i;

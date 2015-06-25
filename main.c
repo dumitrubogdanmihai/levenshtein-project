@@ -5,10 +5,11 @@
 #include "list.h"
 #include "menu.h"
 #include"keys-distantance.h"
+#include"levenshtein.h"
 
 int main() {
     printf("\n\n\t Please wait!");
-
+sugg_funct = 0;
     load_dictionaries();
     build_menu();
     load_keyboard("keyboard.txt");
