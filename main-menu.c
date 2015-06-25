@@ -1,9 +1,16 @@
+<<<<<<< HEAD
 #include"list.h"
 #include"levenshtein.h"
 #include<windows.h>
 #include<stdio.h>
 #include<conio.h>
 #include<string.h>
+=======
+#include"list.h" ///> index_lex(),index_len(),sort_list_len(),sort_list_lex(),list_insert(),list_remove(),save_list(),print_list()
+#include<windows.h> ///> printf()
+#include<stdio.h> ///> printf()
+#include<string.h> ///> printf()
+>>>>>>> origin/master
 
 
 void one_word(){

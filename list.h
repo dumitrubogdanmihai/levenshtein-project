@@ -1,6 +1,18 @@
+///\file list.h
+///\brief Biblioteca C pentru listele si operatiile cu liste.
+///
+/// Autori: Dumitru Bogdan,Enache Ionut in 25/06/2015.
+/**
+    *S-a implementat:
+* -afisarea pe ecran si salvarea unei liste intr-un fisier
+* -inserarea si stergerea unui element
+* -sortarea unei liste lexicografic si dupa numarul de caractere al unui element
+* -salvarea unor noduri speciale(ex: primul nod al nodurilor ce incep cu litera "d" sau au dimensiunea 3)
+*/
+
 #ifndef LIST_H_INCLUDED
 #define LIST_H_INCLUDED
-#include <stdbool.h>
+#include <stdbool.h> ///> printf()
 
 
 typedef struct list_node {

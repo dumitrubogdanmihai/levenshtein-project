@@ -1,8 +1,22 @@
+///\file menu.h
+///\brief Biblioteca C pentru menu si functiile de deplasare prin acesta.
+///
+/// Autori: Dumitru Bogdan,Enache Ionut in 25/06/2015.
+/**
+    *S-a implementat:
+* -construirea si afisarea menu-ului
+* -functiile ce ofera deplasarea utilizatorului prin intermediul acestuia
+*/
+
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
+<<<<<<< HEAD
 
 #include"main-menu.h"
 #include"options-menu.h"
+=======
+#include<string.h> ///> printf()
+>>>>>>> origin/master
 
 int highlighted_item;// elementul activ, a carui functionalitate se activeaza la apasarea tastei enter
 int current_menu;// meniul care este afisat pe ecran in prezent

@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 #include<stdio.h>
 #include<string.h>
 #include<math.h>
 #include"keys-distantance.h"
+=======
+#include<stdio.h> ///> printf()
+#include"keys-distantance.h" ///> getNeighbors(),dist_lit(),distanta_cuvinte(),load_keyboard()
+>>>>>>> origin/master
 
 void getNeighbors(char ch, char * neigh){
     int i,j;

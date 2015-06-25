@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include"keys-distantance.h"
+#include<stdio.h> ///> printf()
+#include"keys-distantance.h" ///> getNeighbors(),dist_lit(),distanta_cuvinte(),load_keyboard()
 
 int min(int a,int b){
     if(a<b)
