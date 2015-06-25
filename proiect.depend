@@ -86,29 +86,31 @@
 	<stdio.h>
 	<string.h>
 
-1434175241 d:\github\levenshtein-project\list.h
+1435244950 d:\github\levenshtein-project\list.h
 	<stdbool.h>
 
-1434175241 source:d:\github\levenshtein-project\keys-distantance.c
+1435155552 source:d:\github\levenshtein-project\keys-distantance.c
 	<stdio.h>
 	"keys-distantance.h"
 
-1434175241 d:\github\levenshtein-project\keys-distantance.h
+1435244950 d:\github\levenshtein-project\keys-distantance.h
 
-1434175241 source:d:\github\levenshtein-project\levenshtein.c
+1435244950 source:d:\github\levenshtein-project\levenshtein.c
 	"list.h"
+	"levenshtein.h"
 	<stdio.h>
 	<string.h>
 	<assert.h>
 
-1434175241 source:d:\github\levenshtein-project\list.c
+1435244950 source:d:\github\levenshtein-project\list.c
 	"list.h"
 	<stdio.h>
+	<stdlib.h>
 	<string.h>
 	<assert.h>
 	<windows.h>
 
-1434175241 source:d:\github\levenshtein-project\main.c
+1435244950 source:d:\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -116,13 +118,16 @@
 	"list.h"
 	"menu.h"
 	"keys-distantance.h"
+	"levenshtein.h"
 
-1434175241 d:\github\levenshtein-project\menu.h
+1435186760 d:\github\levenshtein-project\menu.h
 	<string.h>
 
-1434177601 source:d:\github\levenshtein-project\menu.c
-	"functionalities.h"
+1435244950 source:d:\github\levenshtein-project\menu.c
+	"main-menu.h"
+	"levenshtein.h"
 	"menu.h"
+	"options-menu.h"
 	<conio.h>
 	<windows.h>
 
@@ -214,4 +219,11 @@
 1435237431 c:\users\bogdan\documents\github\levenshtein-project\dictionary.h
 	<stdbool.h>
 	"list.h"
+
+1435244950 d:\github\levenshtein-project\levenshtein.h
+	"list.h"
+
+1435244950 d:\github\levenshtein-project\main-menu.h
+
+1435244950 d:\github\levenshtein-project\options-menu.h
 

@@ -1,3 +1,13 @@
+///\file list.h
+///\brief Biblioteca C pentru realizarea menu-ului si functiilor de deplasare prin acesta.
+///
+/// Autori: Dumitru Bogdan,Enache Ionut in 25/06/2015.
+/**
+    *S-a implementat:
+* -construirea si afisarea menu-ului
+* -functiile ce ofera deplasarea utilizatorului prin intermediul acestuia
+*/
+
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
 #include<string.h>
