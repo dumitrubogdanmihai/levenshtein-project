@@ -5,97 +5,6 @@
 #include <assert.h>
 #include <windows.h>
 
-void free_dict(List * dict){
-    List_Node *i=dict->head;
-    List_Node *next;
-
-    while (i != NULL) {
-        next = i->next;
-
-        free(i->word);
-        free(i);
-
-        i = next;
-    }
-
-    dict->head = NULL;
-    dict->tail = NULL;
-}
-
-
-void load_dictionaries(){
-    l_dict_lex = load_dictionary("dictionary/wordsEnLex.txt",false);
-    index_lex(&l_dict_lex, ind_lex);
-
-    l_dict_len = load_dictionary("dictionary/wordsEnLen.txt",false);
-    index_len(&l_dict_len, ind_len, &max_len);List_Node *i;
-}
-
-List load_words(char file_name[], bool eliminate_duplicates ){
-    List l;
-    l.head =NULL;
-    char buffer[255];
-    FILE *f=fopen(file_name,"r");
-    List_Node *n = NULL;          // n reprezinta noul nod al listei
-
-    if(eliminate_duplicates){ // pentru rapiditatea citirii datelor am scos acest if in afara while-ului
-        while(fgets(buffer,255,f)){
-            if( list_search(&l,buffer)==NULL ){
-                if(buffer[strlen(buffer)-1]=='\n')
-                    buffer[strlen(buffer)-1]='\0';
-                n = (List_Node*) malloc(sizeof(List_Node));
-                n->word = (char *)  malloc(sizeof(char)*strlen(buffer)+1);
-                strcpy(n->word,buffer);
-                list_insert(&l,n);
-            }
-        }
-    }
-    else{
-         while(fgets(buffer,255,f)){
-            if(buffer[strlen(buffer)-1]=='\n')
-                buffer[strlen(buffer)-1]='\0';
-            n = (List_Node*) malloc(sizeof(List_Node));
-            n->word = (char *)  malloc(sizeof(char)*strlen(buffer)+1);
-            strcpy(n->word,buffer);
-            list_insert(&l,n);
-        }
-    }
-    fclose(f);
-    return l;
-}
-List load_dictionary(char file_name[], bool eliminate_duplicates ){ // doar pt limba romana
-    List l;
-    l.head =NULL;
-    List_Node *n = NULL;
-
-    char buffer[255]; //in buffer se va salva fiecare linie din fisier
-    char* p;    // p va reprezenta un pointer la fiecare element din buffer
-
-    FILE* f=fopen(file_name,"r");
-    assert(f!=NULL);
-
-    while(fgets(buffer,255,f)){
-        if(buffer[ strlen(buffer)-1] == '\n')
-           buffer[strlen(buffer)-1] = '\0';
-
-        n = (List_Node*) malloc( sizeof(List_Node) );
-
-        p=strtok(buffer," \t\n");
-        if(p!=NULL){
-            n->word = (char *) malloc( sizeof(char)*strlen(p)+1 );
-            strcpy( n->word, p);
-        }
-
-        p=strtok(NULL," \t\n");
-        if(p!=NULL){
-            n->app = atoi(p);
-        }
-        list_insert(&l,n);
-    }
-    fclose(f);
-    return l;
-}
-
 void index_lex(List* l, List_Node* index[] ) {
     int k;
     char last_ch=NULL;
@@ -180,6 +89,7 @@ void sort_list_len( List *l ){//sorteaza dupa lungimea cuvintelor lista cu inser
     key = key_next;
     }
 }
+
 void sort_list_lex( List *l ){//sorteaza lexicografic lista cu insertion sort
     register List_Node *i;
     register List_Node *key;
@@ -252,6 +162,7 @@ void list_insert(List *l, List_Node *x) {
         l->tail = x;
     }
 }
+
 void list_remove(List *l, List_Node *x) {
     if (x->prev != NULL) {
         x->prev->next = x->next;
@@ -272,9 +183,7 @@ void list_remove(List *l, List_Node *x) {
 void save_list(List* l, char file_name[]) {
     List_Node *i=l->head;
 
-    char file_path[100]="\dictionary\\";
-    strcat(file_path,file_name);
-    FILE* f=fopen(file_path, "w");
+    FILE* f=fopen(file_name, "w");
     assert(f!=NULL);
 
     while (i != NULL) {
@@ -282,28 +191,6 @@ void save_list(List* l, char file_name[]) {
         i = i->next;
     }
     fclose(f);
-}
-void save_dictionary(List* l, char file_name[]) {
-    List_Node *i=l->head;
-    char file_path[100]="\dictionary\\";
-    strcat(file_path,file_name);
-    FILE* f=fopen(file_name, "w");
-    assert(f!=NULL);
-
-    while (i != NULL) {
-        fprintf(f,"%s\t\t %d\n", i->word, i->app);
-        i = i->next;
-    }
-    fclose(f);
-}
-
-void print_dictionary(List* l) {
-    List_Node *i=l->head;
-
-    while (i != NULL) {
-        fprintf(stdout,"%s\t\t %d\n", i->word, i->app);
-        i = i->next;
-    }
 }
 
 void print_list( List_Node* start, List_Node* stop) {
@@ -321,3 +208,4 @@ void print_list( List_Node* start, List_Node* stop) {
 
     }
 }
+

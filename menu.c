@@ -1,7 +1,7 @@
-#include"functionalities.h"
+#include"main-menu.h"
 #include"levenshtein.h"
 #include"menu.h"
-#include"options.h"
+#include"options-menu.h"
 #include<conio.h>
 #include<windows.h>
 
@@ -65,7 +65,7 @@ void menu_enter(){
                     live_input();
                     break;
                 }
-                case 3 : {//Options
+                case 3 : {//options-menu
                     current_menu = 1;
                     highlighted_item = 0;
                     break;
@@ -80,7 +80,7 @@ void menu_enter(){
             break;
         }
 
-        //options
+        //options-menu
         case 1 : {
             switch (highlighted_item){
                 case 0 : {//Update words apparitions
@@ -109,7 +109,7 @@ void menu_enter(){
                 }
                 case 6 : {//select_suggestions_funcition
                     current_menu = 2;
-                    highlighted_item = 0;
+                    highlighted_item = sugg_funct;
                     break;
                 }
                 case 7 : {//back
@@ -164,7 +164,7 @@ void build_menu(){
     strcpy( menu[0].item[0] , "One word" );
     strcpy( menu[0].item[1] , "From file" );
     strcpy( menu[0].item[2] , "Live input" );
-    strcpy( menu[0].item[3] , "Options" );
+    strcpy( menu[0].item[3] , "options-menu" );
     strcpy( menu[0].item[4] , "Quit" );
 
     menu[1].nr_items = 8;

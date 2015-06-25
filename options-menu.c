@@ -26,22 +26,22 @@ void update_app_words(){
     while(fgets(buff,255,f)){
         p=strlwr(strtok(buff,separator));
         while(p!=NULL){
-            n = list_search(&l_dict_lex, p);
+            n = list_search(&dict_lex, p);
             if(n==NULL){
              //   printf("Do you want to add the word \"%s\" to your data-base ?\n1 Yes\n2 No\n\n",p);
 
             }
             else{
                 n->app++;
-                list_search(&l_dict_len, p)->app++;
+                list_search(&dict_len, p)->app++;
             }
 
             p=strlwr(strtok(NULL,separator));
         }
     }
 
-    save_dictionary(&l_dict_lex,"dictionary/wordsEnLex.txt");
-    save_dictionary(&l_dict_len,"dictionary/wordsEnLen.txt");
+    save_dictionary(&dict_lex,"dictionary/wordsEnLex.txt");
+    save_dictionary(&dict_len,"dictionary/wordsEnLen.txt");
 }
 
 void update_words(){
@@ -66,23 +66,23 @@ void update_words(){
     while(fgets(buff,255,f)){
         word=strlwr(strtok(buff,separator));
         while(word!=NULL){
-           search = list_search(&l_dict_lex, word);
+           search = list_search(&dict_lex, word);
             if(search==NULL){
                 new_node = (List_Node*)malloc(sizeof(List_Node));
                 new_node->app = 0;
                 new_node->word = (char*)malloc(sizeof(char)*strlen(word)+1);
                 strcpy(new_node->word,word);
-                list_insert(&l_dict_len,new_node);
+                list_insert(&dict_len,new_node);
 
                 new_node = (List_Node*)malloc(sizeof(List_Node));
                 new_node->app = 0;
                 new_node->word = (char*)malloc(sizeof(char)*strlen(word)+1);
                 strcpy(new_node->word,word);
-                list_insert(&l_dict_lex,new_node);
+                list_insert(&dict_lex,new_node);
             }
             else{
                 search->app++;
-                list_search(&l_dict_len, word)->app++;
+                list_search(&dict_len, word)->app++;
             }
 
             word=strlwr(strtok(NULL,separator));
@@ -90,11 +90,11 @@ void update_words(){
     }
 
 
-    sort_list_len(&l_dict_len);
-    sort_list_lex(&l_dict_lex);
+    sort_list_len(&dict_len);
+    sort_list_lex(&dict_lex);
 
-    save_dictionary(&l_dict_lex,"dictionary/wordsEnLex.txt");
-    save_dictionary(&l_dict_len,"dictionary/wordsEnLen.txt");
+    save_dictionary(&dict_lex,"dictionary/wordsEnLex.txt");
+    save_dictionary(&dict_len,"dictionary/wordsEnLen.txt");
 }
 
 void insert_word(){
@@ -113,25 +113,25 @@ back:
         goto back;
 
 
-    search=list_search(&l_dict_lex, word);
+    search=list_search(&dict_lex, word);
     if(search == NULL){
         new_node = (List_Node*)malloc(sizeof(List_Node));
         new_node->app = 0;
         new_node->word = (char*)malloc(sizeof(char)*strlen(word)+1);
         strcpy(new_node->word,word);
-        list_insert(&l_dict_len,new_node);
+        list_insert(&dict_len,new_node);
 
         new_node = (List_Node*)malloc(sizeof(List_Node));
         new_node->app = 0;
         new_node->word = (char*)malloc(sizeof(char)*strlen(word)+1);
         strcpy(new_node->word,word);
-        list_insert(&l_dict_lex,new_node);
+        list_insert(&dict_lex,new_node);
 
-        sort_list_len(&l_dict_len);
-        sort_list_lex(&l_dict_lex);
+        sort_list_len(&dict_len);
+        sort_list_lex(&dict_lex);
 
-        save_dictionary(&l_dict_lex,"dictionary/wordsEnLex.txt");
-        save_dictionary(&l_dict_len,"dictionary/wordsEnLen.txt");
+        save_dictionary(&dict_lex,"dictionary/wordsEnLex.txt");
+        save_dictionary(&dict_len,"dictionary/wordsEnLen.txt");
 
 
         printf("\nThis word is inserted to the disctionary");
@@ -157,17 +157,17 @@ void delete_word(){
         word[strlen(word)-1]='\0';
 
 
-    search=list_search(&l_dict_lex, word);
+    search=list_search(&dict_lex, word);
     if(search == NULL){
         printf("\nThis word is not stored in the disctionary");
         Sleep(1500);
     }
     else{
-        list_remove(&l_dict_len,search);
-        list_remove(&l_dict_lex,search);
+        list_remove(&dict_len,search);
+        list_remove(&dict_lex,search);
 
-        save_dictionary(&l_dict_lex,"dictionary/wordsEnLex.txt");
-        save_dictionary(&l_dict_len,"dictionary/wordsEnLen.txt");
+        save_dictionary(&dict_lex,"dictionary/wordsEnLex.txt");
+        save_dictionary(&dict_len,"dictionary/wordsEnLen.txt");
 
         printf("\nThis word was deleted from the disctionary");
         Sleep(1500);
@@ -179,8 +179,8 @@ void build_dict(){
     List_Node * new_node;
     List_Node * search;
 
-    free_dict(&l_dict_len);
-    free_dict(&l_dict_lex);
+    free_dict(&dict_len);
+    free_dict(&dict_lex);
 
     system("cls");
 
@@ -201,40 +201,40 @@ void build_dict(){
     while(fgets(buff,255,f)){
         p=strlwr(strtok(buff,separator));
         while(p!=NULL){
-            search=list_search(&l_dict_lex, p);
+            search=list_search(&dict_lex, p);
             if(search == NULL){
                 new_node = (List_Node*)malloc(sizeof(List_Node));
                 new_node->app = 0;
                 new_node->word = (char*)malloc(sizeof(char)*strlen(p)+1);
                 strcpy(new_node->word,p);
-                list_insert(&l_dict_len,new_node);
+                list_insert(&dict_len,new_node);
 
                 new_node = (List_Node*)malloc(sizeof(List_Node));
                 new_node->app = 0;
                 new_node->word = (char*)malloc(sizeof(char)*strlen(p)+1);
                 strcpy(new_node->word,p);
-                list_insert(&l_dict_lex,new_node);
+                list_insert(&dict_lex,new_node);
             }
             else{
                 search->app++;
-                list_search(&l_dict_len, p)->app++;
+                list_search(&dict_len, p)->app++;
             }
 
             p=strlwr(strtok(NULL,separator));
         }
     }
 
-    sort_list_len(&l_dict_len);
-    sort_list_lex(&l_dict_lex);
+    sort_list_len(&dict_len);
+    sort_list_lex(&dict_lex);
 
-    save_dictionary(&l_dict_lex,"dictionary/wordsEnLex.txt");
-    save_dictionary(&l_dict_len,"dictionary/wordsEnLen.txt");
+    save_dictionary(&dict_lex,"dictionary/wordsEnLex.txt");
+    save_dictionary(&dict_len,"dictionary/wordsEnLen.txt");
 }
 
 void reset_dict(){
-    free_dict(&l_dict_len);
-    free_dict(&l_dict_lex);
+    free_dict(&dict_len);
+    free_dict(&dict_lex);
 
-    save_dictionary(&l_dict_lex,"dictionary/wordsEnLex.txt");
-    save_dictionary(&l_dict_len,"dictionary/wordsEnLen.txt");
+    save_dictionary(&dict_lex,"dictionary/wordsEnLex.txt");
+    save_dictionary(&dict_len,"dictionary/wordsEnLen.txt");
 }

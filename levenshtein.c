@@ -4,6 +4,11 @@
 #include<string.h>
 #include <assert.h>
 
+int min_val(int a, int b, int c);
+int leven( char *a, unsigned int lena, char *b, unsigned int lenb );
+int leven2( char *a, unsigned int lena, char *b, unsigned int lenb );
+int difference(char **a, unsigned int lena, char **b, unsigned int lenb);
+void sort_list_lev( List *l , char* word);
 
 int min_val(int a, int b, int c) {
     if(a < b){
@@ -136,29 +141,6 @@ int difference(char **a, unsigned int lena, char **b, unsigned int lenb){
         return leven2(a, lena, b, lenb);
 }
 
-void find_sim_words( List* l_sim, char * word , int changes, List_Node *start, List_Node *stop ){
-    l_sim->head = NULL;
-    l_sim->tail = NULL;
-    List_Node *i;
-    List_Node *aux;
-    int dif=0;
-    i = start;
-    while ( i!=NULL && i->prev != stop) {
-        dif = difference(word, strlen(word), i->word, strlen(i->word));
-
-        assert(dif>=0);
-        if( dif <= changes){
-            aux = (List_Node*) malloc(sizeof(List_Node));
-            aux->word = (char *) malloc(sizeof(char)*  strlen(i->word) );
-            strcpy(aux->word,i->word);
-            list_insert(l_sim,aux);
-        }
-        i = i->next;
-    }
-
-    sort_list_lev(l_sim, word);
-}
-
 void sort_list_lev( List *l , char* word){//sorteaza lexicografic lista cu insertion sort
     register List_Node *i;
     register List_Node *key;
@@ -204,4 +186,27 @@ void sort_list_lev( List *l , char* word){//sorteaza lexicografic lista cu inser
 
     key = key_next;
     }
+}
+
+void find_sim_words( List* l_sim, char * word , int changes, List_Node *start, List_Node *stop ){
+    l_sim->head = NULL;
+    l_sim->tail = NULL;
+    List_Node *i;
+    List_Node *aux;
+    int dif=0;
+    i = start;
+    while ( i!=NULL && i->prev != stop) {
+        dif = difference(word, strlen(word), i->word, strlen(i->word));
+
+        assert(dif>=0);
+        if( dif <= changes){
+            aux = (List_Node*) malloc(sizeof(List_Node));
+            aux->word = (char *) malloc(sizeof(char)*  strlen(i->word) );
+            strcpy(aux->word,i->word);
+            list_insert(l_sim,aux);
+        }
+        i = i->next;
+    }
+
+    sort_list_lev(l_sim, word);
 }
