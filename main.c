@@ -1,13 +1,13 @@
-<<<<<<< HEAD
-#include <stdio.h>
-#include <stdlib.h>
-#include <assert.h>
-#include <windows.h>
-#include "dictionary.h"
-#include "menu.h"
-#include"keys-distantance.h"
-#include"levenshtein.h"
-=======
+//<<<<<<< HEAD
+//#include <stdio.h>
+//#include <stdlib.h>
+//#include <assert.h>
+//#include <windows.h>
+//#include "dictionary.h"
+//#include "menu.h"
+//#include"keys-distantance.h"
+//#include"levenshtein.h"
+//=======
 ///\file main.c
 ///\brief Corector de cuvinte
 ///
@@ -21,7 +21,7 @@
 #include "menu.h" ///> menu_up(),menu_down(),menu_enter(),print_menu(),build_menu()
 #include"keys-distantance.h" ///> getNeighbors(),dist_lit(),distanta_cuvinte(),load_keyboard()
 #include"levenshtein.h" ///> find_sim_words()
->>>>>>> origin/master
+//>>>>>>> origin/master
 
 int main() {
     ///\fn int main()

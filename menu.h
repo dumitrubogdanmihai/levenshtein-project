@@ -10,13 +10,13 @@
 
 #ifndef MENU_H_INCLUDED
 #define MENU_H_INCLUDED
-<<<<<<< HEAD
-
-#include"main-menu.h"
-#include"options-menu.h"
-=======
+//<<<<<<< HEAD
+//
+//#include"main-menu.h"
+//#include"options-menu.h"
+//=======
 #include<string.h> ///> printf()
->>>>>>> origin/master
+//>>>>>>> origin/master
 
 int highlighted_item;// elementul activ, a carui functionalitate se activeaza la apasarea tastei enter
 int current_menu;// meniul care este afisat pe ecran in prezent
