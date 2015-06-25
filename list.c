@@ -1,9 +1,9 @@
-#include "list.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <string.h>
-#include <assert.h>
-#include <windows.h>
+#include "list.h" ///> index_lex(),index_len(),sort_list_len(),sort_list_lex(),list_insert(),list_remove(),save_list(),print_list()
+#include <stdio.h> ///> printf()
+#include <stdlib.h> ///> printf()
+#include <string.h> ///> printf()
+#include <assert.h> ///> printf()
+#include <windows.h> ///> printf()
 
 void index_lex(List* l, List_Node* index[] ) {
     int k;

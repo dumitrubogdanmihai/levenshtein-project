@@ -1,8 +1,8 @@
-#include "list.h"
-#include "dictionary.h"
-#include <stdlib.h>
-#include <stdio.h>
-#include <assert.h>
+#include "list.h" ///> index_lex(),index_len(),sort_list_len(),sort_list_lex(),list_insert(),list_remove(),save_list(),print_list()
+#include "dictionary.h" ///>free_dict(),load_dictionaries(),save_dictionary()
+#include <stdlib.h> ///> printf()
+#include <stdio.h> ///> printf()
+#include <assert.h> ///> printf()
 
 void free_dict(List * dict){
     List_Node *i=dict->head;

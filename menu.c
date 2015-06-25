@@ -1,9 +1,9 @@
-#include"main-menu.h"
+#include"main-menu.h" ///> one_word(),from_file(),live_input()
 #include"levenshtein.h"
-#include"menu.h"
-#include"options-menu.h"
-#include<conio.h>
-#include<windows.h>
+#include"menu.h" ///> menu_up(),menu_down(),menu_enter(),print_menu(),build_menu()
+#include"options-menu.h" ///> update_app_words()
+#include<conio.h> ///> printf()
+#include<windows.h> ///> printf()
 
 void GotoXY( int x, int y){ // move the cursor to the line y and column x
    COORD coord;

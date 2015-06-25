@@ -1,4 +1,4 @@
-#include "list.h"
+#include "list.h" ///> index_lex(),index_len(),sort_list_len(),sort_list_lex(),list_insert(),list_remove(),save_list(),print_list()
 #include "levenshtein.h"
 #include<stdio.h>
 #include<string.h>

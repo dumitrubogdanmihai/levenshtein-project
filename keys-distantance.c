@@ -1,5 +1,5 @@
-#include<stdio.h>
-#include"keys-distantance.h"
+#include<stdio.h> ///> printf()
+#include"keys-distantance.h" ///> getNeighbors(),dist_lit(),distanta_cuvinte(),load_keyboard()
 
 void getNeighbors(char ch, char * neigh){
     int i,j;
