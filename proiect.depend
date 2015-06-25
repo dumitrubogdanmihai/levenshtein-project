@@ -1,6 +1,7 @@
 # depslib dependency file v1.0
-1435176176 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
+1435231119 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
 	"list.h"
+	"levenshtein.h"
 	<stdio.h>
 	<string.h>
 	<assert.h>
@@ -8,7 +9,7 @@
 1435177442 c:\users\bogdan\documents\github\levenshtein-project\list.h
 	<stdbool.h>
 
-1435223746 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
+1435230917 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
 	"list.h"
 	<stdio.h>
 	<stdlib.h>
@@ -16,7 +17,7 @@
 	<assert.h>
 	<windows.h>
 
-1435155738 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+1435224609 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -25,22 +26,23 @@
 	"menu.h"
 	"keys-distantance.h"
 
-1431692871 c:\users\bogdan\documents\github\levenshtein-project\levenshtein.h
+1435231178 c:\users\bogdan\documents\github\levenshtein-project\levenshtein.h
 	"list.h"
 
 1428770663 c:\users\bogdan\documents\github\levenshtein-project\tools.h
 
-1435221797 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
+1435228685 source:c:\users\bogdan\documents\github\levenshtein-project\functionalities.c
 	"list.h"
 	<windows.h>
 	<stdio.h>
 	<string.h>
 
-1435183160 c:\users\bogdan\documents\github\levenshtein-project\menu.h
+1435231756 c:\users\bogdan\documents\github\levenshtein-project\menu.h
 	<string.h>
 
-1435223897 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
+1435230229 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
 	"functionalities.h"
+	"levenshtein.h"
 	"menu.h"
 	"options.h"
 	<conio.h>
@@ -127,7 +129,7 @@
 
 1435221950 c:\users\bogdan\documents\github\levenshtein-project\options.h
 
-1435224376 source:c:\users\bogdan\documents\github\levenshtein-project\options.c
+1435229145 source:c:\users\bogdan\documents\github\levenshtein-project\options.c
 	"list.h"
 	<windows.h>
 	<stdio.h>
