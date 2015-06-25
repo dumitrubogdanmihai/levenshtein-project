@@ -97,7 +97,6 @@ void update_words(){
     save_dictionary(&l_dict_len,"dictionary/wordsEnLen.txt");
 }
 
-
 void insert_word(){
     char fileName[100];
     List_Node * new_node;
@@ -175,7 +174,6 @@ void delete_word(){
     }
 }
 
-
 void build_dict(){
     char fileName[100];
     List_Node * new_node;
@@ -232,7 +230,6 @@ void build_dict(){
     save_dictionary(&l_dict_lex,"dictionary/wordsEnLex.txt");
     save_dictionary(&l_dict_len,"dictionary/wordsEnLen.txt");
 }
-
 
 void reset_dict(){
     free_dict(&l_dict_len);

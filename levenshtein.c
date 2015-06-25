@@ -1,7 +1,9 @@
 #include "list.h"
+#include "levenshtein.h"
 #include<stdio.h>
 #include<string.h>
 #include <assert.h>
+
 
 int min_val(int a, int b, int c) {
     if(a < b){
@@ -19,6 +21,29 @@ int min_val(int a, int b, int c) {
 }
 
 int leven( char *a, unsigned int lena, char *b, unsigned int lenb ){// iterativ
+    unsigned int m[50][50];
+    int i,j;
+
+    for(i=0;i<lena;i++)
+        m[i][0]=i;
+    for(j=0;j<lenb;j++)
+        m[0][j]=j;
+
+    for(i=0;i<lena;i++){
+        for(j=0;j<lenb;j++){
+            if(a[i]==b[j]){
+                m[i+1][j+1]=m[i][j];
+            }
+            else{
+                m[i+1][j+1]=min_val(m[i][j], m[i][j+1], m[i+1][j]) + 1;
+            }
+        }
+    }
+    return m[lena][lenb];
+}
+
+int leven2( char *a, unsigned int lena, char *b, unsigned int lenb ){// iterativ
+
     int m[50][50];
     int dist[50][50];
     int  i,j;
@@ -99,21 +124,32 @@ int leven( char *a, unsigned int lena, char *b, unsigned int lenb ){// iterativ
             }
         }
     }
+
     return m[lena][lenb] + abs(lena-lenb);
     //return m[lena][lenb]+abs(lena-lenb);
 }
 
-void find_similar_words( List* l_sim, char * word , int changes, List_Node *start, List_Node *stop ){
+int difference(char **a, unsigned int lena, char **b, unsigned int lenb){
+    printf("%d\n\n",sugg_funct);
+    if(sugg_funct==0)
+        return leven(a, lena, b, lenb);
+    else
+        return leven2(a, lena, b, lenb);
+}
+
+void find_sim_words( List* l_sim, char * word , int changes, List_Node *start, List_Node *stop ){
+    printf("%d\n\n\n\n",find_sim_words);
     l_sim->head = NULL;
     l_sim->tail = NULL;
     List_Node *i;
     List_Node *aux;
-    int lev;
+    int dif=0;
     i = start;
     while ( i!=NULL && i->prev != stop) {
-        lev = leven(word, strlen(word), i->word, strlen(i->word));
-        assert(lev>=0);
-        if( lev <= changes){
+        dif = difference(word, strlen(word), i->word, strlen(i->word));
+
+        assert(dif>=0);
+        if( dif <= changes){
             aux = (List_Node*) malloc(sizeof(List_Node));
             aux->word = (char *) malloc(sizeof(char)*  strlen(i->word) );
             strcpy(aux->word,i->word);

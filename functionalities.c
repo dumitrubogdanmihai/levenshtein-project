@@ -28,7 +28,7 @@ void one_word(){
 
         if(list_search(&l_dict_lex, word)==NULL){
                 Beep(20,200);
-                find_similar_words(&sim_words, word, strlen(word)/2+1, l_dict_lex.head, l_dict_lex.tail);
+                find_sim_words(&sim_words, word, strlen(word)/2+1, l_dict_lex.head, l_dict_lex.tail);
                 sort_list_lev(&sim_words, word);
                 if(sim_words.head==NULL){
                     Beep(30,200);
@@ -71,7 +71,7 @@ void from_file(){
         while(p!=NULL){
             if(list_search(&l_dict_lex, p)==NULL){
                 Beep(20,200);
-                find_similar_words(&sim_words, p, strlen(p)/2+1, l_dict_lex.head, l_dict_lex.tail);
+                find_sim_words(&sim_words, p, strlen(p)/2+1, l_dict_lex.head, l_dict_lex.tail);
                 sort_list_lev(&sim_words, p);
                 if(sim_words.head==NULL){
                     Beep(30,200);
@@ -247,7 +247,7 @@ void live_input(){
 
                 Beep(20,200);
 
-                find_similar_words(&sim_words, word, strlen(word)/2, l_dict_lex.head, l_dict_lex.tail);
+                find_sim_words(&sim_words, word, strlen(word)/2, l_dict_lex.head, l_dict_lex.tail);
 
                 if(sim_words.head==NULL){
                     ClearSelectAreea();

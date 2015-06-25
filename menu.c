@@ -1,4 +1,5 @@
 #include"functionalities.h"
+#include"levenshtein.h"
 #include"menu.h"
 #include"options.h"
 #include<conio.h>
@@ -86,11 +87,11 @@ void menu_enter(){
                     update_app_words();
                     break;
                 }
-                case 1 : {//Insert an word to dictonary
+                case 1 : {//Insert an word to dictionary
                     insert_word();
                     break;
                 }
-                case 2 : {//Delete an word from dictonary
+                case 2 : {//Delete an word from dictionary
                     delete_word();
                     break;
                 }
@@ -98,21 +99,45 @@ void menu_enter(){
                     reset_dict();
                     break;
                 }
-                case 4 : {//Build dictonary from file
+                case 4 : {//Build dictionary from file
                     build_dict();
                     break;
                 }
-                case 5 : {//Add words to dictonary from file
+                case 5 : {//Add words to dictionary from file
                     update_words();
                     break;
                 }
-                case 6 : {//back
+                case 6 : {//select_suggestions_funcition
+                    current_menu = 2;
+                    highlighted_item = 0;
+                    break;
+                }
+                case 7 : {//back
                     current_menu = 0;
                     highlighted_item = 0;
                     break;
                 }
             }
             break;
+        }
+
+        //select suggestion functions
+        case 2 : {
+            switch (highlighted_item){
+                case 0 : {//leven
+                    sugg_funct = 0;
+                    break;
+                }
+                case 1 : {//leven 2.0
+                    sugg_funct = 1;
+                    break;
+                }
+                case 2 : {//back
+                    current_menu = 1;
+                    highlighted_item = 0;
+                    break;
+                }
+            }
         }
     }
     print_menu();
@@ -142,12 +167,20 @@ void build_menu(){
     strcpy( menu[0].item[3] , "Options" );
     strcpy( menu[0].item[4] , "Quit" );
 
-    menu[1].nr_items = 7;
+    menu[1].nr_items = 8;
     strcpy( menu[1].item[0] , "Update words apparitions" );
-    strcpy( menu[1].item[1] , "Insert an word to dictonary" );
-    strcpy( menu[1].item[2] , "Delete an word from dictonary" );
+    strcpy( menu[1].item[1] , "Insert an word to dictionary" );
+    strcpy( menu[1].item[2] , "Delete an word from dictionary" );
     strcpy( menu[1].item[3] , "Reset dictionary" );
-    strcpy( menu[1].item[4] , "Build dictonary from file" );
-    strcpy( menu[1].item[5] , "Add words to dictonary from file" );
-    strcpy( menu[1].item[6] , "Back" );
+    strcpy( menu[1].item[4] , "Build dictionary from file" );
+    strcpy( menu[1].item[5] , "Add words to dictionary from file" );
+    strcpy( menu[1].item[6] , "Select suggestions function" );
+    strcpy( menu[1].item[7] , "Back" );
+
+
+
+    menu[2].nr_items = 3;
+    strcpy( menu[2].item[0] , "Levenshtein" );
+    strcpy( menu[2].item[1] , "Levenshtein 2.0" );
+    strcpy( menu[2].item[2] , "Back" );
 }

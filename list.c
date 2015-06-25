@@ -23,7 +23,6 @@ void free_dict(List * dict){
 }
 
 
-
 void load_dictionaries(){
     l_dict_lex = load_dictionary("dictionary/wordsEnLex.txt",false);
     index_lex(&l_dict_lex, ind_lex);
@@ -145,7 +144,6 @@ void sort_list_len( List *l ){//sorteaza dupa lungimea cuvintelor lista cu inser
 //    while( (key != NULL) && (key!= (stop->next)) ){
     while( key != NULL ){
         key_next = key->next;
-        printf("%c\n",key->word[0]);
         i = key->prev;
         while( i!=NULL  &&  ( strlen(key->word) < strlen(i->word) )  ){
             i = i->prev;
