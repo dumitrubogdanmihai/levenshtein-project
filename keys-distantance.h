@@ -1,5 +1,5 @@
-///\file list.h
-///\brief Biblioteca C pentru realizarea imbunatatirea .
+///\file keys-distantance.h
+///\brief Biblioteca C pentru imbunatatirea corectarii .
 ///
 /// Autori: Dumitru Bogdan,Enache Ionut in 25/06/2015.
 /**

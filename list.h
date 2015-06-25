@@ -1,5 +1,5 @@
 ///\file list.h
-///\brief Biblioteca C pentru realizarea listelor si operatiilor cu liste.
+///\brief Biblioteca C pentru listele si operatiile cu liste.
 ///
 /// Autori: Dumitru Bogdan,Enache Ionut in 25/06/2015.
 /**
@@ -12,7 +12,7 @@
 
 #ifndef LIST_H_INCLUDED
 #define LIST_H_INCLUDED
-#include <stdbool.h>
+#include <stdbool.h> ///> printf()
 
 
 typedef struct list_node {
