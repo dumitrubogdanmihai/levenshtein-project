@@ -32,5 +32,5 @@ void menu_down();
 void menu_enter();
 void print_menu();
 void build_menu(); // doar "umple" variabilele
-
+void GotoXY( int x, int y);
 #endif // MENU_H_INCLUDED

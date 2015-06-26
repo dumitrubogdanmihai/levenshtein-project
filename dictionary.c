@@ -1,20 +1,29 @@
-//<<<<<<< HEAD
-//#include "list.h"
-//#include "dictionary.h"
-//#include <string.h>
-//#include <stdlib.h>
-//#include <stdio.h>
-//#include <assert.h>
-//=======
+///\file dictionary.c
+///\brief Biblioteca C pentru implementarea dictionarul de cuvinte.
+///
+/// Autori: Dumitru Bogdan,Enache Ionut in 25/06/2015.
+/**
+    *S-a implementat:
+* -salvarea dictionarului intr-un fisier
+* -eliberarea memoriei listei ce contine dictionarul
+* -incarcarea dictionarului
+*/
 #include "list.h" ///> index_lex(),index_len(),sort_list_len(),sort_list_lex(),list_insert(),list_remove(),save_list(),print_list()
-#include "dictionary.h" ///>free_dict(),load_dictionaries(),save_dictionary()
-#include <stdlib.h> ///> printf()
+#include "dictionary.h" ///>free_list(),load_dictionaries(),save_dictionary()
+#include <stdlib.h> ///> malloc()
 #include <stdio.h> ///> printf()
-#include <assert.h> ///> printf()
-//>>>>>>> origin/master
+#include <assert.h> ///> assert()
+#include <string.h> ///> strlen()
 
-void free_dict(List * dict){
-    List_Node *i=dict->head;
+void free_list(List * list){
+
+    ///\fn void free_dict(List * dict)
+    ///\brief Elibereaza memoria alocata dictionarului.
+    ///\param dict Pointer de tip List
+    ///
+    ///Implemntarea eliberarii de momorie alocata unei liste.
+
+    List_Node *i=list->head;
     List_Node *next;
 
     while (i != NULL) {
@@ -26,11 +35,17 @@ void free_dict(List * dict){
         i = next;
     }
 
-    dict->head = NULL;
-    dict->tail = NULL;
+    list->head = NULL;
+    list->tail = NULL;
 }
 
 void load_dictionaries(){
+
+    ///\fn void load_dictionaries()
+    ///\brief Incarcarea dictionarelor in memorie.
+    ///
+    /// Implementarea memorarii dictionarelor din fisierele wordsEnLex.txt si wordsEnLen.txt in listele aferente si indexarea acestora
+
     dict_lex = load_dictionary("dictionary/wordsEnLex.txt",false);
     index_lex(&dict_lex, ind_lex);
 
@@ -39,6 +54,15 @@ void load_dictionaries(){
 }
 
 List load_dictionary(char file_name[], bool eliminate_duplicates ){ // doar pt limba romana
+
+    ///\fn List load_dictionary(char file_name[], bool eliminate_duplicates )
+    ///\brief Incarca dictionarul.
+    ///\param file_name Variabila de tip char ce memoreaza numele fisierului
+    ///\param eliminate_duplicates Variabila de tip bool precizeaza eliminarea duplicatelor
+    ///
+    ///Implemntarea memorarii unui dictionar intr-o lista.
+
+
     List l;
     l.head =NULL;
     List_Node *n = NULL;
@@ -72,6 +96,15 @@ List load_dictionary(char file_name[], bool eliminate_duplicates ){ // doar pt l
 }
 
 void save_dictionary(List* l, char file_name[]) {
+
+    ///\fn void save_dictionary(List* l, char file_name[])
+    ///\brief Salveaza lista.
+    ///\param l Variabila de tip List
+    ///\param file_name Variabila de tip char ce memoreaza numele fisierului
+    ///
+    ///Implemntarea salvarii intr-un fisier a unui dictionar (cuvant si numar de aparitii).
+
+
     List_Node *i=l->head;
     char file_path[100]="\dictionary\\";
     strcat(file_path,file_name);

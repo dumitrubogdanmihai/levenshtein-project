@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1435256369 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
+1435336195 source:c:\users\bogdan\documents\github\levenshtein-project\levenshtein.c
 	"list.h"
 	"levenshtein.h"
 	"keys-distantance.h"
@@ -11,7 +11,7 @@
 1435256369 c:\users\bogdan\documents\github\levenshtein-project\list.h
 	<stdbool.h>
 
-1435256369 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
+1435333832 source:c:\users\bogdan\documents\github\levenshtein-project\list.c
 	"list.h"
 	<stdio.h>
 	<stdlib.h>
@@ -19,7 +19,7 @@
 	<assert.h>
 	<windows.h>
 
-1435257579 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
+1435342642 source:c:\users\bogdan\documents\github\levenshtein-project\main.c
 	<stdio.h>
 	<stdlib.h>
 	<assert.h>
@@ -40,10 +40,10 @@
 	<stdio.h>
 	<string.h>
 
-1435257574 c:\users\bogdan\documents\github\levenshtein-project\menu.h
+1435261096 c:\users\bogdan\documents\github\levenshtein-project\menu.h
 	<string.h>
 
-1435257579 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
+1435336670 source:c:\users\bogdan\documents\github\levenshtein-project\menu.c
 	"main-menu.h"
 	"levenshtein.h"
 	"menu.h"
@@ -65,11 +65,15 @@
 
 1431367803 c:\users\bogdan\documents\github\levenshtein-project\distanta-taste.h
 
-1435257516 source:c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.c
+1435333343 source:c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.c
 	<stdio.h>
+	<string.h>
+	<assert.h>
+	<math.h>
+	<string.h>
 	"keys-distantance.h"
 
-1435256369 c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.h
+1435267016 c:\users\bogdan\documents\github\levenshtein-project\keys-distantance.h
 
 1431693242 c:\users\bogdan\documents\github\levenshtein-project\menu-list.h
 	<string.h>
@@ -195,30 +199,34 @@
 
 1435225550 c:\users\enache\desktop\levenshtein-project\options.h
 
-1435257579 source:c:\users\bogdan\documents\github\levenshtein-project\main-menu.c
+1435343000 source:c:\users\bogdan\documents\github\levenshtein-project\main-menu.c
 	"list.h"
+	"menu.h"
 	<windows.h>
 	<stdio.h>
 	<string.h>
+	<conio.h>
+	"levenshtein.h"
 
 1435256369 c:\users\bogdan\documents\github\levenshtein-project\main-menu.h
 
 1435256369 c:\users\bogdan\documents\github\levenshtein-project\options-menu.h
 
-1435238101 source:c:\users\bogdan\documents\github\levenshtein-project\options-menu.c
+1435336450 source:c:\users\bogdan\documents\github\levenshtein-project\options-menu.c
 	"list.h"
 	<windows.h>
 	<stdio.h>
 	<string.h>
 
-1435257510 source:c:\users\bogdan\documents\github\levenshtein-project\dictionary.c
+1435335404 source:c:\users\bogdan\documents\github\levenshtein-project\dictionary.c
 	"list.h"
 	"dictionary.h"
 	<stdlib.h>
 	<stdio.h>
 	<assert.h>
+	<string.h>
 
-1435256369 c:\users\bogdan\documents\github\levenshtein-project\dictionary.h
+1435323595 c:\users\bogdan\documents\github\levenshtein-project\dictionary.h
 	<stdbool.h>
 	"list.h"
 

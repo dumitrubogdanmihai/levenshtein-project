@@ -14,9 +14,9 @@
 
 int linie_litera[260],coloana_litera[260];
 char keyboard[6][15];
+int nr_linii_taste, nr_coloane_taste;
 
-
-void getNeighbors(char ch, char * neigh);
+char * getNeighbors(char ch);
 int dist_lit(char a, char b);
 void load_keyboard(char fisier[]);
 

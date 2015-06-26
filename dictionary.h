@@ -16,7 +16,7 @@
 #include <stdbool.h> ///> printf()
 #include "list.h" ///> index_lex(),index_len(),sort_list_len(),sort_list_lex(),list_insert(),list_remove(),save_list(),print_list()
 
-void free_dict(List * dict);
+void free_list(List * dict);
 void load_dictionaries();
 List load_dictionary(char file_name[], bool eliminate_duplicates );
 void save_dictionary(List* l, char file_name[]);

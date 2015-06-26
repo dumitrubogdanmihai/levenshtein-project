@@ -1,12 +1,33 @@
+///\file list.c
+///\brief Biblioteca C pentru implementarea listelor si operatiilor cu liste.
+///
+/// Autori: Dumitru Bogdan,Enache Ionut in 25/06/2015.
+/**
+    *S-a implementat:
+* -afisarea pe ecran si salvarea unei liste intr-un fisier
+* -inserarea si stergerea unui element
+* -sortarea unei liste lexicografic si dupa numarul de caractere al unui element
+* -salvarea unor noduri speciale(ex: primul nod al nodurilor ce incep cu litera "d" sau au dimensiunea 3)
+*/
+
 #include "list.h" ///> index_lex(),index_len(),sort_list_len(),sort_list_lex(),list_insert(),list_remove(),save_list(),print_list()
 #include <stdio.h> ///> printf()
-#include <stdlib.h> ///> printf()
-#include <string.h> ///> printf()
-#include <assert.h> ///> printf()
+#include <stdlib.h> ///> malloc()
+#include <string.h> ///> strlen(),tolower()
+#include <assert.h> ///> assert()
 #include <windows.h> ///> printf()
 
 void index_lex(List* l, List_Node* index[] ) {
-    int k;
+
+    ///\fn void index_lex(List* l, List_Node* index[] )
+    ///\brief Memoreaza cate un pointer la fiecare schimbare a literei.
+    ///\param l Variabila de tip List ce reprezinta lista
+    ///\param index Variabila de tip List_Node
+    ///
+    ///Implementarea memorarii unui pointer la fiecare schimbare a literei de inceput a cuvintelor.
+
+
+    int k,j;
     char last_ch=NULL;
     List_Node *i = l->head;
 
@@ -24,6 +45,17 @@ void index_lex(List* l, List_Node* index[] ) {
 }
 
 void index_len(List* l, List_Node* index[], int* max_len ) {
+
+
+    ///\fn void index_len(List* l, List_Node* index[], int* max_len )
+    ///\brief Memoreaza cate un pointer la fiecare schimbare dimensiunii unui nod al listei.
+    ///\param l Variabila de tip List ce reprezinta lista
+    ///\param index Variabila de tip List_Node
+    ///\param max_len Variabila de tip intreg
+    ///
+    ///Implementarea memorarii unui pointer la fiecare schimbare a dimensiunii unui cuvant.
+
+
     int len;
     int k;
     int last_len=0;
@@ -45,6 +77,14 @@ void index_len(List* l, List_Node* index[], int* max_len ) {
 }
 
 void sort_list_len( List *l ){//sorteaza dupa lungimea cuvintelor lista cu insertion sort
+
+    ///\fn void sort_list_len( List *l )
+    ///\brief Sorteaza lista dupa dimensiunea elementelor.
+    ///\param l Variabila de tip List ce reprezinta lista
+    ///
+    ///Implementarea sortarii unei liste dupa dimensiunea elementelor folosind "Insertion Sort".
+
+
     register List_Node *i;
     register List_Node *key;
     register List_Node *key_next;
@@ -91,6 +131,14 @@ void sort_list_len( List *l ){//sorteaza dupa lungimea cuvintelor lista cu inser
 }
 
 void sort_list_lex( List *l ){//sorteaza lexicografic lista cu insertion sort
+
+    ///\fn void sort_list_lex( List *l )
+    ///\brief Sorteaza lista lexicografic.
+    ///\param l Variabila de tip List ce reprezinta lista
+    ///
+    ///Implementarea sortarii unei liste lexicografic folosind "Insertion Sort".
+
+
     register List_Node *i;
     register List_Node *key;
     register List_Node *key_next;
@@ -138,7 +186,16 @@ void sort_list_lex( List *l ){//sorteaza lexicografic lista cu insertion sort
 }
 
 List_Node* list_search(List *l, char *k) {
-    List_Node *x;
+
+    ///\fn List_Node* list_search(List *l, char *k)
+    ///\brief Cautarea unui element intr-o lista.
+    ///\param l Variabila de tip List
+    ///\param k Variabila de tip char ce reprezinta nodul cautat in lista
+    ///
+    ///Implementarea cautarii unui element intr-o lista.
+
+
+    register List_Node *x;
     x = l->head;
     while ( x!=NULL && strcmp(x->word,k)!=0 ) {
         x = x->next;
@@ -147,6 +204,15 @@ List_Node* list_search(List *l, char *k) {
 }
 
 void list_insert(List *l, List_Node *x) {
+
+    ///\fn void list_insert(List *l, List_Node *x)
+    ///\brief Inserarea unui element intr-o lista.
+    ///\param l Variabila de tip List
+    ///\param x Variabila de tip List_Node ce reprezinta nodul ce trebuie introdus in lista
+    ///
+    ///Implementarea inserarii unui element intr-o lista.
+
+
     if(l->head==NULL){
         l->head = x;
         l->tail= x;
@@ -164,6 +230,15 @@ void list_insert(List *l, List_Node *x) {
 }
 
 void list_remove(List *l, List_Node *x) {
+
+    ///\fn void list_remove(List *l, List_Node *x)
+    ///\brief Stergerea unui element intr-o lista.
+    ///\param l Variabila de tip List
+    ///\param x Variabila de tip List_Node ce reprezinta nodul pe care doril sa il stergem din lista
+    ///
+    ///Implementarea stergerii unui element intr-o lista.
+
+
     if (x->prev != NULL) {
         x->prev->next = x->next;
     }
@@ -181,7 +256,16 @@ void list_remove(List *l, List_Node *x) {
 }
 
 void save_list(List* l, char file_name[]) {
-    List_Node *i=l->head;
+
+     ///\fn void save_list(List* l, char file_name[])
+    ///\brief Salvarea listei.
+    ///\param l Variabila de tip List
+    ///\param file_name Variabila de tip char
+    ///
+    ///Implementarea salvarii unei liste intr-un fisier.
+
+
+    register List_Node *i=l->head;
 
     FILE* f=fopen(file_name, "w");
     assert(f!=NULL);
@@ -194,11 +278,19 @@ void save_list(List* l, char file_name[]) {
 }
 
 void print_list( List_Node* start, List_Node* stop) {
+
+    ///\fn void print_list( List_Node* start, List_Node* stop)
+    ///\brief Afisarea unui interval al unei liste.
+    ///\param start Variabila de tip List_Node ce reprezinta nodul de start al afisarii
+    ///\param stop Variabila de tip List_Node ce reprezinta nodul de sfarsit al afisarii
+    ///
+    ///Implementarea afisarii unui interval al unei liste specificat prin parametrii.
+
     if(start == NULL){
         printf(" Vid list!\n");
     }
     else{
-        List_Node *n;
+        register List_Node *n;
 
         n = start;
         while (n!=NULL && n != stop->next ) {

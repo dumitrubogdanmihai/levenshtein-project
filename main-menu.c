@@ -1,21 +1,55 @@
-//<<<<<<< HEAD
-//#include"list.h"
-//#include"levenshtein.h"
-//#include<windows.h>
-//#include<stdio.h>
-//#include<conio.h>
-//#include<string.h>
-//=======
+
+///\file main-menu.c
+///\brief Biblioteca C pentru implementarea optiunilor menu-ului.
+///
+/// Autori: Dumitru Bogdan,Enache Ionut in 25/06/2015.
+/**
+    *S-a implementat:
+* -functia de corectare a unui singur cuvant
+* -corectarea unui text dintr-un fisier
+* -corectarea cuvintelor in timp real
+*/
+
 #include"list.h" ///> index_lex(),index_len(),sort_list_len(),sort_list_lex(),list_insert(),list_remove(),save_list(),print_list()
-#include<windows.h> ///> printf()
+#include"menu.h" ///> menu_up(),menu_down(),menu_enter(),print_menu(),build_menu()
+#include<windows.h> ///> Sleep()
 #include<stdio.h> ///> printf()
-#include<string.h> ///> printf()
-//>>>>>>> origin/master
+#include<string.h> ///> strcpy()
+#include<conio.h> ///> getch()
+#include"levenshtein.h" ///> find_sim_words()
+
+bool is_letter(char c){
+
+    ///\fn bool is_letter(char c)
+    ///\brief Verificarea daca un caracter este litera
+    ///\param c Variabila de tip char
+    ///
+    ///Implementarea verificarii unui caracter daca este litera
+
+
+//    if(c<'A' || c>'z')
+//        return false;
+//    return true;
+
+    int i;
+
+    char separator[]=" ,./;'[]\<>?:\"{}|~!@#$%^&*()`_+-=\n";
+    for(i=0;i<strlen(separator);i++)
+        if(c==separator[i])
+            return false;
+    return true;
+}
 
 
 void one_word(){
+
+    ///\fn void one_word()
+    ///\brief Corectarea un cuvant introdus.
+    ///
+    ///Implementarea corectarii a unui cuvant introdus de la tastatura.
+
+
     char word[50]; // cuvantul care va fi verificat
-    int error;      // eroarea maxima a cuvatului / diferenta maxima suportata dintre cuvinte
     List sim_words ;  // lista cuvintelor asemanatoare cu cuvantul citit
 
 // golirea bufferului
@@ -29,87 +63,220 @@ void one_word(){
 
    while( 1 ){        //repeat while ESC isn't pressed
 
-        printf("\n\n Enter the word: ");
-        scanf("%s",word);
-        printf(" Enter the maximum error accepted: ");
-        scanf("%d",&error);
-        printf("\n");
+        tryAgain:
+        system("cls");
+        printf("\n\tPlease enter the word:  ");
+        gets(word);
+        if(word[strlen(word)-1]=='\n')
+            word[strlen(word)-1]='\0';
+        if(strlen(word)<=2)
+            goto tryAgain;
 
-        if(list_search(&dict_lex, word)==NULL){
+            // if the word is incorrect
+            if(list_search(&dict_lex, word)==NULL){
+
                 Beep(20,200);
-                find_sim_words(&sim_words, word, strlen(word)/2+1, dict_lex.head, dict_lex.tail);
+
+                find_sim_words(&sim_words, word, strlen(word), dict_lex.head, dict_lex.tail);
+
                 if(sim_words.head==NULL){
-                    Beep(30,200);
+                    ClearSelectAreea();
+                    Beep(90,200);
+                    GotoXY(3,3);
                     printf("The word \"%s\" is incorrect and there are no word like him!\n",word);
+                    getchar();
+                    return;
                 }
                 else{
-                    Beep(10,200);
-                    printf("The word \"%s\" is not correct!\n Suggestions: \n",word);
-                    print_list(sim_words.head, sim_words.tail);
+                    Beep(70,200);
+                    List_Node * newTail = malloc(sizeof(List_Node));
+                    newTail->word = malloc(sizeof(char)*strlen(word)+1);
+                    strcpy(newTail->word,word);
+                    list_insert(&sim_words,newTail);
+                    Select_correct_word(word, &sim_words);
+                    free_list(&sim_words);
+                    return;
                 }
-        }
-        else{
-            printf("The word \"%s\" is correct!\n",word);
-        }
-
-        printf("\n\t  Press any key to try again or press ESC to come back to the main menu!  ");
-        getch();
-        if( GetAsyncKeyState( VK_ESCAPE )& 0x8000 ){
-            break;
-        }
+            }
+            else{
+                ClearSelectAreea();
+                GotoXY(3,3);
+                printf("The word \"%s\" is correct!\n",word);
+                return;
+            }
     }
 }
 
 void from_file(){
-    system("cls");
-    printf("\n\t\tFrom file function \n");
-    char buff[255];
-    char separator[]=" ,.?!-\n";
-    char *p;
-    FILE *f = fopen("file.txt","r");
-    List sim_words ;
 
+    ///\fn void from_file()
+    ///\brief Corectarea unui sir de caractere.
+    ///
+    ///Implementarea corectarii a unui sir de caractere citit din fisier.
+
+
+    char fileName[100];
+    char buff[2255];
+    char *p;
+
+    FILE * f_corected = fopen("from file corected.txt","w");
+    FILE * file;
+    char ch[2],word[150],wordINIT[150];
+    ch[1]='\0';
+    List sim_words ;
+    POINT curs, cursBack;// cursor position
+
+
+    tryAgain:
+    system("cls");
+    printf("\n\tPlease enter the name of the file (e.g. : file.txt):  ");
+    gets(fileName);
+    if(fileName[strlen(fileName)-1]=='\n')
+        fileName[strlen(fileName)-1]='\0';
+    if(strlen(fileName)<=2)
+        goto tryAgain;
+
+    file = fopen(fileName,"r");
+    if( file == NULL ){
+        printf("\n\t This file doesn't exist!");
+        Sleep(2000);
+        goto tryAgain;
+    }
+
+
+    GotoXY(3,3);
+    printf(" Here you will see all the informations you need about your text!");
+
+    GotoXY(3,9);
+    printf("Your text:");
+
+    // complex flush
     fflush(stdin);
-    char ch;
-    while ((ch = getchar()) != '\n' && ch != EOF)
+    while ((ch[0] = getchar()) != '\n' && ch[0] != EOF)
         continue;
 
-    while(fgets(buff,255,f)){
-        p=strlwr(strtok(buff,separator));
-        while(p!=NULL){
-            if(list_search(&dict_lex, p)==NULL){
+    GotoXY(3,10);// typing
+
+     while(1){
+
+        word[0]='\0';
+        ch[0]='\0';
+            if(kbhit()){
+                ch[0] = getch();
+                if(is_letter(ch[0]) == true){
+                    strcat(word,ch );
+                    printf("%c",ch[0]);
+                }
+            }
+        save_curs(&curs);
+        if(!fgets(ch,2,file)){
+                getchar();
+                fclose(f_corected);
+                fclose(file);
+                return;
+            }
+        //add a word
+        while( is_letter(ch[0])==true  ){
+
+
+            strcat(word,ch);
+            printf("%c",ch[0]);
+
+            if(GetAsyncKeyState( VK_ESCAPE )& 0x8000){
+                fclose(f_corected);
+                return;
+            }
+            if(!fgets(ch,2,file)){
+                getchar();
+                fclose(f_corected);
+                return;
+            }
+        }
+
+        strcpy(wordINIT,word);
+        strcpy(word,strlwr(word));
+
+        // if an word was typed
+        if(word[0]>='A' && word[0]<='z' && strlen(word)>=2){
+            if(word[strlen(word)-1]<'A' || word[strlen(word)-1]>'z')
+                word[strlen(word)-1]='\0';
+
+            // if the word is incorrect
+            if(list_search(&dict_lex, strlwr(word))==NULL){
+
                 Beep(20,200);
-                find_sim_words(&sim_words, p, strlen(p)/2+1, dict_lex.head, dict_lex.tail);
-                sort_list_lev(&sim_words, p);
+                    GotoXY(3,3);
+                    printf("The word \"%s\" is incorrect!",word);
+
+                sim_words.head=NULL;
+                sim_words.tail=NULL;
+                find_sim_words(&sim_words, word, strlen(word), dict_lex.head, dict_lex.tail);
+
                 if(sim_words.head==NULL){
-                    Beep(30,200);
-                    printf("The word \"%s\" is incorrect and there are no word like him!\n",p);
+                    ClearSelectAreea();
+                    Beep(90,200);
+                    GotoXY(3,3);
+                    printf("The word \"%s\" is incorrect and there are no word like him!\n",word);
+                    Sleep(650);
+                    getchar();
                 }
                 else{
-                    Beep(10,200);
-                    printf("The word \"%s\" is not correct!\n Suggestions: \n",p);
-                    print_list(sim_words.head, sim_words.tail);
+                    Beep(70,200);
+                    List_Node * newTail = malloc(sizeof(List_Node));
+                    newTail->word = malloc(sizeof(char)*strlen(wordINIT)+1);
+                    strcpy(newTail->word,wordINIT);
+                    list_insert(&sim_words,newTail);
+                    Select_correct_word(word, &sim_words);
+                    ClearSelectAreea();
+                    GotoXY(3,3);
+                    printf("The correct word for \"%s\" is \"%s\"!",wordINIT,word);
+                    strcpy(wordINIT,word);
+                    free_list(&sim_words);
                 }
             }
             else{
-                    printf("The word \"%s\" is correct!\n",p);
+                ClearSelectAreea();
+                GotoXY(3,3);
+                printf("The word \"%s\" is correct!\n",word);
             }
-
-            p=strlwr(strtok(NULL,separator));
         }
+
+        ClearAfterPoint(curs);
+
+        // back to the saved cursor
+        GotoXY(curs.x, curs.y);
+
+        // update the word to the cmd and go on
+        printf("%s",wordINIT);
+        printf("%c",ch[0]);
+
+        fprintf(f_corected,"%s",wordINIT);
+        fprintf(f_corected,"%c",ch[0]);
+
+        Sleep(50);
     }
-    printf("\n\tPress any key to come back to the main menu!");
-    getch();
+    getchar();
 }
 
 // functii necesare pentru live-input
 void flush(){
+    ///\fn void flush()
+    ///\brief Functia ce goleste bufferul.
+    ///
+
     char ch;
     fflush(stdin);
         while ((ch = getchar()) != '\n' && ch != EOF)
             continue;
 }
 void ClearSelectAreea(){
+
+    ///\fn void ClearSelectAreea()
+    ///\brief Sterge suprafata de sugestii.
+    ///
+    ///Implementarea stergerii DOAR a suprafetei rezervata sugestiilor pentru cuvintele gresite.
+
+
     int i;
     for(i=0;i<8;i++){
         GotoXY(0,i);
@@ -117,6 +284,14 @@ void ClearSelectAreea(){
     }
 }
 void ClearAfterPoint(POINT p){
+
+    ///\fn void ClearAfterPoint(POINT p)
+    ///\brief Sterge caracaterele nedorite.
+    ///\param p Variabila de tip POINT
+    ///
+    ///Implementarea functiei de stergere pentru caracterele nedorite aparute in urma selectarii sugestiilor cu ajutorul sagetilor.
+
+
     int i;
     GotoXY(p.x,p.y);
     for(i=0;i<9;i++){
@@ -125,6 +300,16 @@ void ClearAfterPoint(POINT p){
     GotoXY(p.x,p.y);
 }
 void Print_sel(char * word, List * l, List_Node * high_item){//print selection area
+
+    ///\fn void Print_sel(char * word, List * l, List_Node * high_item)
+    ///\brief Afisarea sugestiei.
+    ///\param word Variabila de tip char
+    ///\param l Variabila de tip List
+    ///\param high_item Variabila de tip List_Node
+    ///
+    ///Implementarea afisarii sugestiei selectate.
+
+
     List_Node* i;
     i=l->head;
     int cnt=0;
@@ -152,7 +337,16 @@ void Print_sel(char * word, List * l, List_Node * high_item){//print selection a
 
 }
 void Select_correct_word(char * word, List * sugestions){
-    //printf("\n\t SELECT\n");Sleep(300);
+
+
+   ///\fn Select_correct_word(char * word, List * sugestions)
+    ///\brief Selectarea sugestiei.
+    ///\param word Variabila de tip char
+    ///\param sugestions Variabila de tip List reprezentand sugestiile gasite
+    ///
+    ///Implementarea gasirii celor mai apropiate cuvinte de cuvantul considerat gresit
+
+
     List_Node * high_item;
     high_item = sugestions->head;
 
@@ -165,6 +359,7 @@ void Select_correct_word(char * word, List * sugestions){
             else
                 high_item = sugestions->tail;
             Print_sel(word,  sugestions, high_item );
+            Sleep(100);
         }
 
         if(GetAsyncKeyState( VK_DOWN )& 0x8000){
@@ -173,31 +368,36 @@ void Select_correct_word(char * word, List * sugestions){
             else
                 high_item = sugestions->head;
             Print_sel(word,  sugestions, high_item );
+            Sleep(100);
         }
 
         if(GetAsyncKeyState( VK_RETURN)& 0x8000){
             strcpy(word, high_item->word);
-            ClearSelectAreea();
-            GotoXY(3,3);
-            printf("The word \"%s\" was replaced by the word \"%s\"!",word,high_item->word);flush();
+            Sleep(50);
+            flush();
             return;
         }
-        Sleep(100); //kill the extra sensibility
     }flush();
 }
 
 void live_input(){
 
+    ///\fn void live_input()
+    ///\brief Corectare in timp real.
+    ///
+    ///Implementarea corectarii in timp real ale cuvintelor introduse de la tastatura.
+
+
     FILE * f_corected = fopen("live_input f_corected.txt","w");
     FILE * f_inserted = fopen("live_input f_inserted.txt","w");
-    char ch[2],word[50];
+    char ch[2],word[50],wordINIT[50];
     ch[1]='\0';
     List sim_words ;
     POINT curs, cursBack;// cursor position
 
     ClearSelectAreea();
     GotoXY(3,3);
-    printf(" Here you will see all the informations you need about your text");
+    printf(" Here you will see all the informations you need about your text ");
 
     GotoXY(3,9);
     printf("Your text:");
@@ -212,13 +412,13 @@ void live_input(){
 
         word[0]='\0';
         ch[0]='\0';
-        save_curs(&curs);
 
+        save_curs(&curs);
         //add a word
-        while(ch[0]!=' '){
+        while( is_letter(ch[0])==true ){
             if(kbhit()){
                 ch[0] = getch();
-                if(ch[0]>'A'&&ch[0]<'z'){
+                if(is_letter(ch[0]) == true){
                     strcat(word,ch);
                     printf("%c",ch[0]);
                 }
@@ -244,32 +444,48 @@ void live_input(){
             if(GetAsyncKeyState( VK_RETURN )& 0x8000) break;
         }
 
+
+        strcpy(wordINIT,word);
+        strcpy(word,strlwr(word));
+
         // if an word was typed
-        if(word[0]!='\0'){
-            if(word[strlen(word)-1]==' ')
+        if(word[0]>='A' && word[0]<='z' && strlen(word)>=2){
+            if(word[strlen(word)-1]<'A' || word[strlen(word)-1]>'z')
                 word[strlen(word)-1]='\0';
 
-            fprintf(f_inserted,"%s ",word);
+            fprintf(f_inserted,"%s",word);
+            fprintf(f_inserted,"%c",ch[0]);
+
             // if the word is incorrect
             if(list_search(&dict_lex, word)==NULL){
 
                 Beep(20,200);
-
-                find_sim_words(&sim_words, word, strlen(word)/2, dict_lex.head, dict_lex.tail);
+                find_sim_words(&sim_words, word, strlen(word), dict_lex.head, dict_lex.tail);
 
                 if(sim_words.head==NULL){
                     ClearSelectAreea();
                     Beep(90,200);
+
+                    ClearSelectAreea();
                     GotoXY(3,3);
                     printf("The word \"%s\" is incorrect and there are no word like him!\n",word);
+                    Sleep(650);
+                    getchar();
                 }
                 else{
                     Beep(70,200);
                     List_Node * newTail = malloc(sizeof(List_Node));
-                    newTail->word = malloc(sizeof(char)*strlen(word)+1);
-                    strcpy(newTail->word,word);
+                    newTail->word = malloc(sizeof(char)*strlen(wordINIT)+1);
+                    strcpy(newTail->word,wordINIT);
                     list_insert(&sim_words,newTail);
                     Select_correct_word(word, &sim_words);
+
+                    ClearSelectAreea();
+                    GotoXY(3,3);
+                    printf("The correct word for \"%s\" is \"%s\"!",wordINIT,word);
+
+                    free_list(&sim_words);
+                    strcpy(wordINIT,word);
                 }
             }
             else{
@@ -285,11 +501,12 @@ void live_input(){
         GotoXY(curs.x, curs.y);
 
         // update the word to the cmd and go on
-        printf("%s ",word);
+        printf("%s",wordINIT);
+        printf("%c",ch[0]);
 
-        fprintf(f_corected,"%s ",word);
+        fprintf(f_corected,"%s",wordINIT);
+        fprintf(f_corected,"%c",ch[0]);
 
         Sleep(50);
     }
-
 }

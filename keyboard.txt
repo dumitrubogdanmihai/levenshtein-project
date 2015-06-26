@@ -1,4 +1,5 @@
-3 10
-qwertyuiop
-asdfghjkll
-zxcvbnmmmm
+4 12
+1234567890-=
+qwertyuiop[]
+asdfghjkll,.
+zzxcvbnmmm,.
